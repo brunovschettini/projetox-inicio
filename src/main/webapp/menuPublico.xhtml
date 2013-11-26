@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:body>
+        <h:form id="form_menu">
+            <p:growl id="messages" autoUpdate="true" showDetail="true"/>
+            <p:menubar>
+                <p:menuitem value="Inicio" url="#" />  
+                <p:menuitem value="Serviços" url="#" />  
+                <p:submenu label="Empresa">  
+                    <p:menuitem value="Quem somos" url="#" />  
+                    <p:menuitem value="Política" url="#" />  
+                    <p:menuitem value="Localização" url="#" />  
+                </p:submenu>  
+                <p:submenu label="Cadastro">  
+                    <p:menuitem value="Prestador de serviços" url="#" />  
+                    <p:menuitem value="Cliente" url="#" />
+                    <p:menuitem value="Login" url="login.xhtml" />
+                </p:submenu>
+                <f:facet name="options">
+                    <p:outputLabel value="Usuario: " for="id_usuario"/>  
+                    <p:inputText id="id_usuario"  />
+                    <p:outputLabel value=" Senha: " for="id_senha"/>  
+                    <p:inputText id="id_senha"  />
+                    <p:commandButton value="Entrar" title="Entrar"  styleClass="margin-left-max" />
+                    <p:commandButton type="button" icon="ui-icon-extlink" title="Sair" styleClass="margin-left-max"/>  
+                </f:facet>  
+            </p:menubar> 
+        </h:form>
+    </h:body>
+</html>

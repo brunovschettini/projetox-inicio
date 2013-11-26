@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Pesquisar usuários</title>
+        <ui:include src="templateAdmin.xhtml"/>
+    </h:head>
+    <h:body>
+        <div class="wrapper">
+            <div class="header">
+                <div class="logo"></div>
+            </div>
+            <div class="menu-top">
+                <ui:decorate template="/menuRedeServico.xhtml">
+                    <ui:define name="centro"></ui:define>
+                </ui:decorate>
+                <h:form id="form_usuario_adminstrador">
+                    <div class="font-title-spacing">
+                        <p:outputLabel value="Pesquisar usuários" styleClass="font-title"  />
+                    </div>
+                    <p:dataTable value="#{usuarioBean.listaUsuarios}" var="usuario" scrollHeight="400">
+                        <p:column headerText="ID" width="50" styleClass="text-center">
+                            <p:commandLink action="#{usuarioBean.editarAdministrador(usuario)}" value="#{usuario.id}"/>
+                        </p:column> 
+                        <p:column headerText="Login">
+                            <p:commandLink action="#{usuarioBean.editarAdministrador(usuario)}" value="#{usuario.login}"/>
+                        </p:column> 
+                        <p:column headerText="Pessoa">
+                            <p:commandLink action="#{usuarioBean.editarAdministrador(usuario)}" value="#{usuario.pessoa.nome}"/>
+                        </p:column> 
+                        <p:column headerText="Tipo de acesso" width="100" styleClass="text-center">
+                            <p:commandLink action="#{usuarioBean.editarAdministrador(usuario)}" value="#{usuario.tipoUsuarioAcesso.descricao}"/>
+                        </p:column> 
+                    </p:dataTable>                    
+                </h:form>                
+            </div>
+        </div>
+        <br />
+    </h:body>
+</html>
+

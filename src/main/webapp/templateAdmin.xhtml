@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+        <h:head>
+            <title>Rede Serviço</title>
+            <meta http-equiv="X-UA-Compatible" content="IE=9" />
+            <!-- <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/Imagens/favicon.ico"/> -->
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/default.css" rel="stylesheet" type="text/css"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/reset.css" rel="stylesheet" type="text/css"/>        
+            <script language="JavaScript">javascript: window.history.forward(1);</script>
+        </h:head>
+        <f:view>
+            <h:form id="form_historico_menu" onsubmit="#{chamadaPaginaBean.historicoMenu}">
+                <h:panelGrid columns="6" rendered="true">
+                    <p:dataList styleClass="menuLinksClass" var="menuLinks" value="#{chamadaPaginaBean.menuLinks}" rowIndexVar="it">
+                        <p:graphicImage title="Voltar um nível" rendered="#{menuLinks.descricao != 'Menu Adminstrativo Rede Servico'}"/>
+                        <h:commandLink value="#{menuLinks.descricao}" title="#{menuLinks.descricao}" action="#{chamadaPaginaBean.cliqueMenuLinks(it)}" rendered="#{menuLinks.ativo}" immediate="true" /> 
+                    </p:dataList>
+                </h:panelGrid>
+            </h:form>
+        </f:view>
+</ui:composition>
