@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "PES_TIPO_USUARIO_ACESSO")
-@NamedQuery(name = "TipoUsuarioAcesso.findById", query = "select tua from TipoUsuarioAcesso tua where tua.id = :pid")
+@Table(name = "SEG_TIPO_USUARIO_ACESSO")
+@NamedQuery(name = "TipoUsuarioAcesso.findById", query = "SELECT TUA FROM TipoUsuarioAcesso AS TUA WHERE TUA.id = :pid")
 public class TipoUsuarioAcesso implements Serializable {
 
     @Id

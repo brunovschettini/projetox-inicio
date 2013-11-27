@@ -17,7 +17,8 @@ public class UsuarioDAO extends DB {
             query.setParameter("senha", usuario.getSenha());
             List list = query.getResultList();
             if (!list.isEmpty()) {
-                return new Usuario();
+                usuario = (Usuario) query.getSingleResult();
+                return usuario;
             }
         } catch (Exception e) {
             return null;

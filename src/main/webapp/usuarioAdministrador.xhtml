@@ -41,9 +41,9 @@
                             <p:column />
                             <p:selectBooleanCheckbox value="#{usuarioBean.usuario.ativo}" itemLabel="Ativo"/>
                             <p:outputLabel value="Área de entrada: " />
-                            <p:selectOneMenu value="#{usuarioBean.idTipoAcesso}">
-                                <p:ajax event="change" update="@this" />
-                                <f:selectItems value="#{usuarioBean.listaTipoAcesso}" var="tipoUsuarioAcesso" itemValue="#{tipoUsuarioAcesso.id}" itemLabel="#{tipoUsuarioAcesso.descricao}"/>
+                            <p:selectOneMenu value="#{usuarioBean.idTipoUsuario}">
+                                <f:selectItem itemLabel="Selecione o tipo de acesso" itemValue="" noSelectionOption="true"/>
+                                <f:selectItems value="#{usuarioBean.listaTipoAcesso}" />
                             </p:selectOneMenu>
                         </h:panelGrid>
                         <p:panelGrid columns="3">

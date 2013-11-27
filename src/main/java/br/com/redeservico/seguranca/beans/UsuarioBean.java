@@ -30,8 +30,8 @@ public class UsuarioBean {
     private String mensagem = "";
     private String senha = "";
     private String confirmaSenha = "";
-    private List<TipoUsuarioAcesso> listaTipoAcesso = new ArrayList<TipoUsuarioAcesso>();
-    private int idTipoAcesso = 0;
+    private List<SelectItem> listaTipoAcesso = new ArrayList<SelectItem>();
+    private int idTipoUsuario = 0;
 
     public void init() {
         System.err.println("UsuarioBean");
@@ -46,7 +46,7 @@ public class UsuarioBean {
             if (senha.equals("")) {
                 mensagem = "Informar a senha de confirmação!";
                 return;
-            }            
+            }
             if (confirmaSenha.equals("")) {
                 mensagem = "Informar a senha de confirmação!";
                 return;
@@ -58,7 +58,7 @@ public class UsuarioBean {
             if (confirmaSenha.length() < 5) {
                 mensagem = "A senha deve ter no mínno 5 caracteres";
                 return;
-            }            
+            }
             if (!confirmaSenha.equals(senha)) {
                 modificarSenha = true;
                 senha = "";
@@ -67,21 +67,16 @@ public class UsuarioBean {
                 return;
             }
             modificarSenha = true;
-            usuario.setSenha(senha);        
+            usuario.setSenha(senha);
             senha = "";
             confirmaSenha = "";
         }
         InterageDAO interageDAO = new InterageDAO();
+        usuario.setTipoUsuarioAcesso((TipoUsuarioAcesso) interageDAO.findId(Integer.parseInt(listaTipoAcesso.get(idTipoUsuario).getDescription()), "TipoUsuarioAcesso"));
         usuario.setPessoa((Pessoa) interageDAO.findObjectByID(1, "Pessoa"));
         if (usuario.getPessoa().getId() == -1) {
             mensagem = "Pesquisar uma pessoa!";
             return;
-        }
-        for (int i = 0;i  < listaTipoAcesso.size(); i++) {
-            if (listaTipoAcesso.get(i).getId() == idTipoAcesso) {
-                usuario.setTipoUsuarioAcesso(listaTipoAcesso.get(i));
-                break;
-            }
         }
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario u = (Usuario) usuarioDAO.usuarioExiste(this.usuario);
@@ -136,12 +131,12 @@ public class UsuarioBean {
 
     public String editarAdministrador(Usuario u) {
         usuario = u;
-        for (int i = 0;i  < listaTipoAcesso.size(); i++) {
-            if (listaTipoAcesso.get(i).getId() == idTipoAcesso) {
-                idTipoAcesso = i;
+        for (int i = 0; i < listaTipoAcesso.size(); i++) {
+            if (Integer.parseInt(listaTipoAcesso.get(i).getDescription()) == usuario.getTipoUsuarioAcesso().getId()) {
+                idTipoUsuario = i;
                 break;
             }
-        }        
+        }
         return "usuarioAdministrador";
     }
 
@@ -238,11 +233,11 @@ public class UsuarioBean {
     public void setModificarSenha(boolean modificarSenha) {
         this.modificarSenha = modificarSenha;
     }
-    
+
     public void alterarSenha() {
         modificarSenha = false;
     }
-    
+
     public void validaSenha() {
         if (!confirmaSenha.equals("") && !senha.equals("")) {
             if (senha.length() < 5) {
@@ -250,7 +245,7 @@ public class UsuarioBean {
                 return;
             }
             if (confirmaSenha.length() < 5) {
-                GenericaMensagem.warn("Validação", "A senha deve ter no mínno 5 caracteres");                
+                GenericaMensagem.warn("Validação", "A senha deve ter no mínno 5 caracteres");
                 return;
             }
             if (!confirmaSenha.equals(senha)) {
@@ -261,24 +256,26 @@ public class UsuarioBean {
         }
     }
 
-    public int getIdTipoAcesso() {
-        return idTipoAcesso;
-    }
-
-    public void setIdTipoAcesso(int idTipoAcesso) {
-        this.idTipoAcesso = idTipoAcesso;
-    }
-
-    public List<TipoUsuarioAcesso> getListaTipoAcesso() {
+    public List<SelectItem> getListaTipoAcesso() {
         if (listaTipoAcesso.isEmpty()) {
             InterageDAO interageDAO = new InterageDAO();
-            listaTipoAcesso = interageDAO.findAll("TipoUsuarioAcesso");
-        }        
+            List<TipoUsuarioAcesso> list = interageDAO.findAll("TipoUsuarioAcesso");
+            for (int i = 0; i < list.size(); i++) {
+                listaTipoAcesso.add(new SelectItem(new Integer(i), list.get(i).getDescricao(), Integer.toString(list.get(i).getId())));
+            }
+        }
         return listaTipoAcesso;
     }
 
-    public void setListaTipoAcesso(List<TipoUsuarioAcesso> listaTipoAcesso) {
+    public void setListaTipoAcesso(List<SelectItem> listaTipoAcesso) {
         this.listaTipoAcesso = listaTipoAcesso;
     }
 
+    public int getIdTipoUsuario() {
+        return idTipoUsuario;
+    }
+
+    public void setIdTipoUsuario(int idTipoUsuario) {
+        this.idTipoUsuario = idTipoUsuario;
+    }
 }

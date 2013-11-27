@@ -21,14 +21,18 @@ public class ChamadaPaginaBean {
     private int nivelLink = 0;
     private boolean carregaPagina = true;
     private boolean linkClicado = false;
+    private int tipoPagina = 0;
+    private String urlAtual = "";
     private HttpServletRequest paginaRequerida = null;
-    public String verificaPermissao() {
-        if (usuarioSessao != null) {
-            if (usuarioSessao.getId() != -1) {
-
-            }
-        }
-        return "index";
+    
+    public String metodoGenerico(int tipo, String pagina) {
+        paginaRequerida = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        urlAtual = converteURL(paginaRequerida.getRequestURI());
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("urlRetorno", urlAtual);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("linkClicado", true);
+        carregaPagina = true;
+        tipoPagina = tipo;
+        return pagina;
     }
     
     public String getHistoricoMenu() {
@@ -44,15 +48,15 @@ public class ChamadaPaginaBean {
             if (linkRetorno == null) {
                 linkRetorno = "";
             }
-            if (linkAtual.equals("acessoNegado") || FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("indicaAcesso") == null) {
+            if (linkAtual.equals("acessoNegado") || !GenericaSessao.exists("indicaAcesso")) {
                 carregaPagina = false;
                 return;
             }
-            if (linkAtual.equals("sessaoExpirou") || FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("indicaAcesso") == null) {
+            if (linkAtual.equals("sessaoExpirou") || !GenericaSessao.exists("indicaAcesso")) {
                 carregaPagina = false;
                 return;
             }
-            if (linkAtual.equals("menuPrincipal") || linkAtual.equals("menuPrincipalAcessoWeb") || linkAtual.equals("menuPrincipalSuporteWeb")) {
+            if (linkAtual.equals("adminRedeServico") || linkAtual.equals("menuPrincipalAcessoWeb") || linkAtual.equals("menuPrincipalSuporteWeb")) {
                 carregaPagina = true;
                 nivelLink = 0;
             }
