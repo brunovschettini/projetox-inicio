@@ -346,3 +346,22 @@ SELECT setval('pes_porte_id_seq', max(id)) FROM pes_porte;
 
 INSERT INTO pes_pessoa(id, ds_nome, id_tipo_documento) SELECT 1, 'Administrador', '1' WHERE NOT EXISTS ( SELECT id FROM pes_pessoa WHERE id = 1);
 SELECT setval('pes_pessoa_id_seq', max(id)) FROM pes_pessoa;
+
+
+INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 1, 'Black Tie', 'black-tie', false  WHERE NOT EXISTS ( SELECT id FROM pes_tipo_endereco WHERE id = 1);
+INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 2, 'Bluesky', 'bluesky', false  WHERE NOT EXISTS ( SELECT id FROM pes_tipo_endereco WHERE id = 2);
+INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 3, 'Casablanca', 'casablanca', false WHERE NOT EXISTS ( SELECT id FROM pes_tipo_endereco WHERE id = 3);
+INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 4, 'Cupertino', 'cupertino', false  WHERE NOT EXISTS ( SELECT id FROM sis_temas WHERE id = 4);
+INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 5, 'Excite Bike', 'excite-bike', false  WHERE NOT EXISTS ( SELECT id FROM sis_temas WHERE id = 5);
+INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 6, 'Flick', 'flick', true  WHERE NOT EXISTS ( SELECT id FROM sis_temas WHERE id = 6);
+INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 7, 'Glass X', 'glass-x', false  WHERE NOT EXISTS ( SELECT id FROM sis_temas WHERE id = 7);
+INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 8, 'Home', 'home', true  WHERE NOT EXISTS ( SELECT id FROM sis_temas WHERE id = 8);
+INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 9, 'Hot Sneaks', 'hot-sneaks', false  WHERE NOT EXISTS ( SELECT id FROM sis_temas WHERE id = 9);
+INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 10, 'Overcast', 'overcast', false  WHERE NOT EXISTS ( SELECT id FROM sis_temas WHERE id = 10);
+INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 11, 'Smoothness', 'smoothness', true  WHERE NOT EXISTS ( SELECT id FROM sis_temas WHERE id = 11);
+INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 12, 'South Street', 'south-street', false  WHERE NOT EXISTS ( SELECT id FROM sis_temas WHERE id = 12);
+INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 13, 'Sunny', 'sunny', false  WHERE NOT EXISTS ( SELECT id FROM sis_temas WHERE id = 13);
+INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 14, 'Swanky Purse', 'swanky-purse', false  WHERE NOT EXISTS ( SELECT id FROM sis_temas WHERE id = 14);
+INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 15, 'Trontastic', 'trontastic', false  WHERE NOT EXISTS ( SELECT id FROM sis_temas WHERE id = 15);
+INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 16, 'Vader', 'vader', false  WHERE NOT EXISTS ( SELECT id FROM sis_temas WHERE id = 16);
+SELECT setval('sis_temas_id_seq', max(id)) FROM sis_temas;
