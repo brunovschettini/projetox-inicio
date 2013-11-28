@@ -3,6 +3,9 @@ package br.com.redeservico.servico;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Situação do serviço agendado no processo, cada operação gera uma mudança de status
+ */
 @Entity
 @Table(name = "SER_STATUS_AGENDAMENTO")
 @NamedQuery(name = "StatusAgendamento.findById", query = "SELECT SA FROM StatusAgendamento AS SA WHERE SA.id = :pid")

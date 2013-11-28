@@ -4,9 +4,12 @@ import br.com.redeservico.financeiro.Servicos;
 import java.io.Serializable;
 import javax.persistence.*;
 
+/**
+ * Serviços solicitados para o serviço agendado
+ */
 @Entity
 @Table(name = "SER_SOLICITADO")
-@NamedQuery(name = "ServicoSolicitado.pesquisaID", query = "SELECT SS FROM ServicoSolicitado AS SS WHERE SS.id = :pid")
+@NamedQuery(name = "ServicoSolicitado.findById", query = "SELECT SS FROM ServicoSolicitado AS SS WHERE SS.id = :pid")
 public class ServicoSolicitado implements Serializable {
 
     @Id

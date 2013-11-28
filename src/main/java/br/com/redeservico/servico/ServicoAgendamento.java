@@ -6,6 +6,9 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
+/**
+ * Especifica dia de agendamento o(s) serviço(s), os serviços do agendamento estão na rotina Servico solicitado (ServicoSolicitado)
+  */
 @Entity
 @Table(name = "SER_AGENDAMENTO")
 @NamedQuery(name = "ServicoAgendamento.findById", query = "SELECT ASE FROM ServicoAgendamento AS ASE WHERE ASE.id = :pid")

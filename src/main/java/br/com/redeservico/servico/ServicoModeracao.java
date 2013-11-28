@@ -6,6 +6,9 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
+/**
+ * Modera os serviços agendandos para empresa
+ */
 @Entity
 @Table(name = "SER_MODERACAO")
 @NamedQuery(name = "ServicoModeracao.pesquisaID", query = "SELECT SM FROM ServicoModeracao AS SM WHERE SM.id = :pid")
@@ -78,6 +81,10 @@ public class ServicoModeracao implements Serializable {
         this.dtModeracao = dtModeracao;
     }
 
+    /**
+     * @see se for true, o processo é continuado, se for false o serviço agendando entra no status não aprovado
+     * @return moderado
+     */
     public boolean isModerado() {
         return moderado;
     }
