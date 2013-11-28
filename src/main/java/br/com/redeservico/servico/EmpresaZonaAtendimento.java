@@ -6,6 +6,9 @@ import br.com.redeservico.financeiro.Servicos;
 import java.io.Serializable;
 import javax.persistence.*;
 
+/**
+ * Especifica a zona de atendimento da empresa
+  */
 @Entity
 @Table(name = "SER_EMPRESA_ZONA_ATENDIMENTO")
 @NamedQuery(name = "EmpresaZonaAtendimento.findById", query = "SELECT EZA FROM EmpresaZonaAtendimento AS EZA WHERE EZA.id = :pid")
@@ -46,6 +49,11 @@ public class EmpresaZonaAtendimento implements Serializable {
         this.id = id;
     }
 
+    /**
+     * 
+     * @return servicos
+     * @see
+     */
     public Servicos getServicos() {
         return servicos;
     }
@@ -61,7 +69,11 @@ public class EmpresaZonaAtendimento implements Serializable {
     public void setCidade(Cidade cidade) {
         this.cidade = cidade;
     }
-
+    
+    /**
+     * @return zona
+     * <i>Ex.</i> <b>Zona sul</b>, <b>região da lapa</b>
+     */
     public Zona getZona() {
         return zona;
     }

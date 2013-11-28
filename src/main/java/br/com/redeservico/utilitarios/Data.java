@@ -5,14 +5,25 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+/**
+ * <code>Data</code> Métodos para tratamento de Data
+ */
 public class Data {
 
+    /**
+     * Retorna a data atual
+     * @return CURRENT_DATE
+     */
     public static Date dataHoje() {
         Date dateTime = new Date();
         //DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  data e hora
         return dateTime;
     }
 
+    /**
+     * Retorna a data atual convertida em String
+     * @return CURRENT_DATE
+     */    
     public static String data() {
         Date dateTime = new Date();
         //DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");   data e hora
@@ -21,6 +32,12 @@ public class Data {
         return a;
     }
 
+     /**
+     * Retorna data personalizada
+     * @param date 
+     * @param format (Formato que a (Date) data deverá retornar - yyyy-MM-dd HH:mm:ss - Ex. Entra 2013-01-01 - livre(date, 'dd/MM/yyyy'))
+     * @return '01/01/2013'
+     */
     public static String livre(Date date, String format) {
         if (format.isEmpty()) {
             format = "yyyy-MM-dd HH:mm:ss";
@@ -29,7 +46,12 @@ public class Data {
         String a = dateFormat.format(date);
         return a;
     }
-
+    
+    /**
+     * Converte Date para String
+     * @param data
+     * @return 
+     */
     public static String converteData(Date data) {
         if (data != null) {
             String a = data.toString();
@@ -41,11 +63,21 @@ public class Data {
         }
     }
 
+    /**
+     * Converte String para Date
+     * @param data
+     * @return 
+     */    
     public static String converteData(String data) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(data);
     }
 
+    /**
+     * Converte String para Date
+     * @param data
+     * @return 
+     */      
     public static Date converte(String data) {
         if (data != null) {
             try {
@@ -171,6 +203,11 @@ public class Data {
         return dias;
     }
 
+    /**
+     * Verifica se o ano é Bisexto
+     * @param ano
+     * @return ano bisexto
+     */
     public static boolean isBisexto(int ano) {
         if ((ano % 4) == 0) {
             return true;
@@ -490,6 +527,10 @@ public class Data {
         return Data.converteData(Data.converte(data));
     }
 
+    /**
+     * Retorna a hora atual
+     * @return hora atual
+     */
     public static String hora() {
         StringBuilder sb = new StringBuilder();
         GregorianCalendar d = new GregorianCalendar();
@@ -655,6 +696,11 @@ public class Data {
         return hora;
     }
 
+    /**
+     * Converte data para data por extenso
+     * @param data
+     * @return data por extenso
+     */
     public static String dataExtenso(String data) {
         String extenso = "";
         String dia = data.substring(0, 2);
