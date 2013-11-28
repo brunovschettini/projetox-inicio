@@ -24,7 +24,7 @@
                     <p:inputText type="password" value="#{controleAcessoBean.usuario.senha}" id="id_senha" maxlength="15" size="18" styleClass="margin-left"/>
                     <p:watermark for="id_senha" value="Senha" /> 
                     <p:commandButton value="Acessar" action="#{controleAcessoBean.login()}" styleClass="margin-top margin-left" update="id_messages" />
-                    <p:commandButton type="button" icon="ui-icon-extlink" title="Sair" styleClass="margin-left-max"/>  
+                    <p:commandButton icon="ui-icon-extlink" title="Sair" styleClass="margin-left-max" action="#{controleAcessoBean.logout}"/>
                 </f:facet>  
             </p:menubar> 
         </h:form>

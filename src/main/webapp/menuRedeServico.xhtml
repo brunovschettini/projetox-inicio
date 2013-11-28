@@ -4,7 +4,7 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:body>
         <h:form id="form_menu">
-            <p:growl id="messages" autoUpdate="true" showDetail="true"/>
+            <p:growl id="id_messages" autoUpdate="true" showDetail="true"/>
             <p:menubar>
                 <p:menuitem value="Inicio" url="#" />  
                 <p:submenu label="Segurança">  
@@ -16,12 +16,12 @@
                     <p:menuitem value="Login" action="#{chamadaPaginaBean.login()}" immediate="true"/>
                 </p:submenu>
                 <f:facet name="options">
-                    <p:outputLabel value="Usuario: " for="id_usuario"/>  
-                    <p:inputText id="id_usuario"  />
-                    <p:outputLabel value=" Senha: " for="id_senha"/>  
-                    <p:inputText id="id_senha"  />
-                    <p:commandButton value="Entrar" title="Entrar"  styleClass="margin-left-max" />
-                    <p:commandButton type="button" icon="ui-icon-extlink" title="Sair" styleClass="margin-left-max"/>  
+                    <p:inputText value="#{controleAcessoBean.usuario.login}" id="id_login" maxlength="15" size="18"/>
+                    <p:watermark for="id_login" value="Nome de usuário" /> 
+                    <p:inputText type="password" value="#{controleAcessoBean.usuario.senha}" id="id_senha" maxlength="15" size="18" styleClass="margin-left"/>
+                    <p:watermark for="id_senha" value="Senha" /> 
+                    <p:commandButton value="Acessar" action="#{controleAcessoBean.login()}" styleClass="margin-top margin-left" update="id_messages" />
+                    <p:commandButton icon="ui-icon-extlink" title="Sair" styleClass="margin-left-max" action="#{controleAcessoBean.logout}"/>
                 </f:facet>  
             </p:menubar> 
         </h:form>
