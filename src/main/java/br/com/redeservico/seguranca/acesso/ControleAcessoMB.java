@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 @ManagedBean
 @SessionScoped
-public class ControleAcessoBean implements Serializable {
+public class ControleAcessoMB implements Serializable {
 
     private Usuario usuario = new Usuario();
     HttpServletRequest paginaRequerida;

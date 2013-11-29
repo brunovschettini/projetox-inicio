@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean
 @SessionScoped
-public class ChamadaPaginaBean {
+public class ChamadaPaginaMB {
 
     private final Usuario usuarioSessao = (Usuario) GenericaSessao.getObject("sessaoUsuario");
     private List<MenuLinks> menuLinks = new ArrayList<MenuLinks>();
@@ -200,15 +200,25 @@ public class ChamadaPaginaBean {
     }
     
     public String usuarioAdministrador() {
-        GenericaSessao.remove("usuarioBean");
-        GenericaSessao.remove("pesquisaPessoaBean");
+        GenericaSessao.remove("usuarioMB");
+        GenericaSessao.remove("pesquisaPessoaMB");
         return "usuarioAdministrador";
+    }
+    
+    public String pessoaFisica() {
+        GenericaSessao.remove("pessoaFisicaMB");
+        GenericaSessao.remove("pesquisaPessoaFisicaMB");
+        return "pessoaFisica";
     }
     
     // PESQUISAS
     
     public String pesquisaUsuario() {
         return "pesquisaUsuario";
+    }
+    
+    public String pesquisaFisica() {
+        return "pesquisaFisica";
     }
 
     public List<MenuLinks> getMenuLinks() {

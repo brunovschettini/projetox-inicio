@@ -8,20 +8,23 @@
             <p:menubar>
                 <p:menuitem value="Inicio" url="#" />  
                 <p:submenu label="Segurança">  
-                    <p:menuitem value="Usuário" action="#{chamadaPaginaBean.usuarioAdministrador()}" />  
-                </p:submenu>  
+                    <p:menuitem value="Usuário" action="#{chamadaPaginaMB.usuarioAdministrador()}" />  
+                </p:submenu>
+                <p:submenu label="Pessoa">  
+                    <p:menuitem value="Pessoa física" action="#{chamadaPaginaMB.pessoaFisica()}" />  
+                </p:submenu>
                 <p:submenu label="Cadastro">  
                     <p:menuitem value="Prestador de serviços" url="#" />  
                     <p:menuitem value="Cliente" url="#" />
-                    <p:menuitem value="Login" action="#{chamadaPaginaBean.login()}" immediate="true"/>
+                    <p:menuitem value="Login" action="#{controleAcessoMB.login()}" immediate="true"/>
                 </p:submenu>
                 <f:facet name="options">
-                    <p:inputText value="#{controleAcessoBean.usuario.login}" id="id_login" maxlength="15" size="18"/>
+                    <p:inputText value="#{controleAcessoMB.usuario.login}" id="id_login" maxlength="15" size="18"/>
                     <p:watermark for="id_login" value="Nome de usuário" /> 
-                    <p:inputText type="password" value="#{controleAcessoBean.usuario.senha}" id="id_senha" maxlength="15" size="18" styleClass="margin-left"/>
+                    <p:inputText type="password" value="#{controleAcessoMB.usuario.senha}" id="id_senha" maxlength="15" size="18" styleClass="margin-left"/>
                     <p:watermark for="id_senha" value="Senha" /> 
-                    <p:commandButton value="Acessar" action="#{controleAcessoBean.login()}" styleClass="margin-top margin-left" update="id_messages" />
-                    <p:commandButton icon="ui-icon-extlink" title="Sair" styleClass="margin-left-max" action="#{controleAcessoBean.logout}"/>
+                    <p:commandButton value="Acessar" action="#{controleAcessoMB.login()}" styleClass="margin-top margin-left" update="id_messages" />
+                    <p:commandButton icon="ui-icon-extlink" title="Sair" styleClass="margin-left-max" action="#{controleAcessoMB.logout}"/>
                 </f:facet>  
             </p:menubar> 
         </h:form>

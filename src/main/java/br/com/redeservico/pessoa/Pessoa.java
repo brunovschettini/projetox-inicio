@@ -7,12 +7,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "PES_PESSOA")
-@NamedQuery(name = "Pessoa.findById", query = "select pes from Pessoa pes where pes.id=:pid")
+@NamedQuery(name = "Pessoa.findById", query = "SELECT PES FROM Pessoa AS PES WHERE PES.id = :pid")
 public class Pessoa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id; 
+    private int id;
     @Column(name = "DS_NOME", length = 150)
     private String nome;
     @JoinColumn(name = "ID_TIPO_DOCUMENTO", referencedColumnName = "ID", nullable = false)
@@ -22,18 +22,8 @@ public class Pessoa implements Serializable {
     private String obs;
     @Column(name = "DS_SITE", length = 50)
     private String site;
-    @Column(name = "DS_TELEFONE1", length = 20)
-    private String telefone1;
-    @Column(name = "DS_TELEFONE2", length = 20)
-    private String telefone2;
-    @Column(name = "DS_TELEFONE3", length = 20)
-    private String telefone3;
-    @Column(name = "DS_EMAIL1", length = 50)
-    private String email1;
-    @Column(name = "DS_EMAIL2", length = 50)
-    private String email2;
-    @Column(name = "DS_EMAIL3", length = 50)
-    private String email3;
+    @Column(name = "DS_EMAIL", length = 50)
+    private String email;
     @Column(name = "DS_DOCUMENTO", length = 30)
     private String documento;
     @Temporal(TemporalType.DATE)
@@ -46,30 +36,18 @@ public class Pessoa implements Serializable {
         this.tipoDocumento = new TipoDocumento();
         this.obs = "";
         this.site = "";
-        setCriacao(Data.data());
-        this.telefone1 = "";
-        this.telefone2 = "";
-        this.telefone3 = "";
-        this.email1 = "";
-        this.email2 = "";
-        this.email3 = "";
+        this.email = "";
         this.documento = "";
     }
 
-    public Pessoa(int id, String nome, TipoDocumento tipoDocumento, String obs, String site, String criacao,
-            String telefone1, String telefone2, String telefone3, String email1, String email2, String email3, String documento) {
+    public Pessoa(int id, String nome, TipoDocumento tipoDocumento, String obs, String site, String criacao, String email, String documento) {
         this.id = id;
         this.nome = nome;
         this.tipoDocumento = tipoDocumento;
         this.obs = obs;
         this.site = site;
         setCriacao(criacao);
-        this.telefone1 = telefone1;
-        this.telefone2 = telefone2;
-        this.telefone3 = telefone3;
-        this.email1 = email1;
-        this.email2 = email2;
-        this.email3 = email3;
+        this.email = email;
         this.documento = documento;
     }
 
@@ -113,52 +91,12 @@ public class Pessoa implements Serializable {
         this.site = site;
     }
 
-    public String getTelefone1() {
-        return telefone1;
+    public String getEmail() {
+        return email;
     }
 
-    public void setTelefone1(String telefone1) {
-        this.telefone1 = telefone1;
-    }
-
-    public String getTelefone2() {
-        return telefone2;
-    }
-
-    public void setTelefone2(String telefone2) {
-        this.telefone2 = telefone2;
-    }
-
-    public String getTelefone3() {
-        return telefone3;
-    }
-
-    public void setTelefone3(String telefone3) {
-        this.telefone3 = telefone3;
-    }
-
-    public String getEmail1() {
-        return email1;
-    }
-
-    public void setEmail1(String email1) {
-        this.email1 = email1;
-    }
-
-    public String getEmail2() {
-        return email2;
-    }
-
-    public void setEmail2(String email2) {
-        this.email2 = email2;
-    }
-
-    public String getEmail3() {
-        return email3;
-    }
-
-    public void setEmail3(String email3) {
-        this.email3 = email3;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getDocumento() {

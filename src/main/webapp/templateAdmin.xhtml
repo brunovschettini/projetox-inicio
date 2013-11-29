@@ -12,13 +12,13 @@
             <script language="JavaScript">javascript: window.history.forward(1);</script>
         </h:head>
         <f:view>
-            <h:form id="form_validacao" onsubmit="#{controleAcessoBean.validacao}"></h:form>
-            <h:form id="form_historico_menu" onsubmit="#{chamadaPaginaBean.historicoMenu}">
+            <h:form id="form_validacao" onsubmit="#{controleAcessoMB.validacao}"></h:form>
+            <h:form id="form_historico_menu" onsubmit="#{chamadaPaginaMB.historicoMenu}">
                 <h:panelGrid columns="6" rendered="true">
-                    <h:inputHidden value="#{controleAcessoBean.validacao}" />
-                    <p:dataList styleClass="menuLinksClass" var="menuLinks" value="#{chamadaPaginaBean.menuLinks}" rowIndexVar="it">
+                    <h:inputHidden value="#{controleAcessoMB.validacao}" />
+                    <p:dataList styleClass="menuLinksClass" var="menuLinks" value="#{chamadaPaginaMB.menuLinks}" rowIndexVar="it">
                         <p:graphicImage title="Voltar um nível" rendered="#{menuLinks.descricao != 'Menu Adminstrativo Rede Servico'}"/>
-                        <h:commandLink value="#{menuLinks.descricao}" title="#{menuLinks.descricao}" action="#{chamadaPaginaBean.cliqueMenuLinks(it)}" rendered="#{menuLinks.ativo}" immediate="true" /> 
+                        <h:commandLink value="#{menuLinks.descricao}" title="#{menuLinks.descricao}" action="#{chamadaPaginaMB.cliqueMenuLinks(it)}" rendered="#{menuLinks.ativo}" immediate="true" /> 
                     </p:dataList>
                 </h:panelGrid>
             </h:form>

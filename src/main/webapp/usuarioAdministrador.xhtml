@@ -22,58 +22,58 @@
                     <div class="font-title-spacing">
                         <p:outputLabel value="Cadastro de Usuário" styleClass="font-title"  />
                     </div>
-                    <p:panel id="id_panel_cadastro" header="Cadastro #{usuarioBean.usuario.cadastro}">
+                    <p:panel id="id_panel_cadastro" header="Cadastro #{usuarioMB.usuario.cadastro}">
                         <p:messages id="id_messages" showDetail="true" autoUpdate="true" closable="true" />
                         <h:panelGrid columns="2" styleClass="margin-top">
                             <p:outputLabel value="Usuário: "/>
-                            <p:inputText value="#{usuarioBean.usuario.login}" />
+                            <p:inputText value="#{usuarioMB.usuario.login}" />
                             <p:outputLabel value="Senha: " />
                             <p:column>
-                                <p:inputText type="password" value="#{usuarioBean.senha}" disabled="#{usuarioBean.modificarSenha}" id="id_senha">
-                                    <p:ajax listener="#{usuarioBean.validaSenha}" update="id_messages" />
+                                <p:inputText type="password" value="#{usuarioMB.senha}" disabled="#{usuarioMB.modificarSenha}" id="id_senha">
+                                    <p:ajax listener="#{usuarioMB.validaSenha}" update="id_messages" />
                                 </p:inputText>
-                                <p:commandButton icon="ui-icon-pencil" action="#{usuarioBean.alterarSenha}" update=":form_usuario_adminstrador:id_senha_confirma, :form_usuario_adminstrador:id_senha" styleClass="margin-left-max" rendered="#{usuarioBean.usuario.id != -1}"/>
+                                <p:commandButton icon="ui-icon-pencil" action="#{usuarioMB.alterarSenha}" update=":form_usuario_adminstrador:id_senha_confirma, :form_usuario_adminstrador:id_senha" styleClass="margin-left-max" rendered="#{usuarioMB.usuario.id != -1}"/>
                             </p:column>
                             <p:outputLabel value="Confirmar senha: " />
-                            <p:inputText type="password" value="#{usuarioBean.confirmaSenha}" disabled="#{usuarioBean.modificarSenha}" id="id_senha_confirma"> 
-                                <p:ajax listener="#{usuarioBean.validaSenha}" update="id_messages" />
+                            <p:inputText type="password" value="#{usuarioMB.confirmaSenha}" disabled="#{usuarioMB.modificarSenha}" id="id_senha_confirma"> 
+                                <p:ajax listener="#{usuarioMB.validaSenha}" update="id_messages" />
                             </p:inputText>
                             <p:column />
-                            <p:selectBooleanCheckbox value="#{usuarioBean.usuario.ativo}" itemLabel="Ativo"/>
+                            <p:selectBooleanCheckbox value="#{usuarioMB.usuario.ativo}" itemLabel="Ativo"/>
                             <p:outputLabel value="Área de entrada: " />
-                            <p:selectOneMenu value="#{usuarioBean.idTipoUsuario}">
+                            <p:selectOneMenu value="#{usuarioMB.idTipoUsuario}">
                                 <f:selectItem itemLabel="Selecione o tipo de acesso" itemValue="" noSelectionOption="true"/>
-                                <f:selectItems value="#{usuarioBean.listaTipoAcesso}" />
+                                <f:selectItems value="#{usuarioMB.listaTipoAcesso}" />
                             </p:selectOneMenu>
                         </h:panelGrid>
                         <p:panelGrid columns="3">
                             <f:facet name="header">Tipos do usuário</f:facet>
-                            <p:selectBooleanCheckbox value="#{usuarioBean.administrador}" itemLabel="Administrador" disabled="true"/>
-                            <p:selectBooleanCheckbox value="#{usuarioBean.empresa}" itemLabel="Empresa" disabled="true"/>
-                            <p:selectBooleanCheckbox value="#{usuarioBean.cliente}" itemLabel="Cliente" disabled="true"/>
+                            <p:selectBooleanCheckbox value="#{usuarioMB.administrador}" itemLabel="Administrador" disabled="true"/>
+                            <p:selectBooleanCheckbox value="#{usuarioMB.empresa}" itemLabel="Empresa" disabled="true"/>
+                            <p:selectBooleanCheckbox value="#{usuarioMB.cliente}" itemLabel="Cliente" disabled="true"/>
                         </p:panelGrid>
                         <h:panelGrid columns="4" styleClass="margin-top-max">
                             <p:commandButton value="Salvar" onclick="dgl_salvar.show()" type="button"/>
-                            <p:commandButton value="Novo" action="#{usuarioBean.novo}" update="id_panel_cadastro"/>
+                            <p:commandButton value="Novo" action="#{usuarioMB.novo}" update="id_panel_cadastro"/>
                             <p:commandButton value="Excluir" onclick="dgl_excluir.show()"  type="button" />
                             <p:commandButton value="Pesquisar" action="#{chamadaPaginaBean.pesquisaUsuario()}" />
                         </h:panelGrid>
                     </p:panel>
                     <p:dialog widgetVar="dgl_salvar" header="Salvar este registro?" closable="true" resizable="false">
                         <h:panelGrid columns="3">
-                            <p:commandButton value="Confirmar" onclick="dgl_salvar.hide(); dgl_mensagem.show()" action="#{usuarioBean.salvarAdministrador()}" update="id_panel_cadastro, id_mensagem"/>
+                            <p:commandButton value="Confirmar" onclick="dgl_salvar.hide(); dgl_mensagem.show()" action="#{usuarioMB.salvarAdministrador()}" update="id_panel_cadastro, id_mensagem"/>
                             <p:commandButton value="Cancelar" onclick="dgl_salvar.hide()" type="button" />
                         </h:panelGrid>
                     </p:dialog>
                     <p:dialog widgetVar="dgl_excluir" header="Excluir este registro?" closable="true" resizable="false">
                         <h:panelGrid columns="3">
-                            <p:commandButton value="Confirmar" onclick="dgl_excluir.hide(); dgl_mensagem.show()" action="#{usuarioBean.excluir()}" update="id_panel_cadastro, id_mensagem"/>
+                            <p:commandButton value="Confirmar" onclick="dgl_excluir.hide(); dgl_mensagem.show()" action="#{usuarioMB.excluir()}" update="id_panel_cadastro, id_mensagem"/>
                             <p:commandButton value="Cancelar" onclick="dgl_excluir.hide()" type="button" />
                         </h:panelGrid>
                     </p:dialog>
                     <p:dialog widgetVar="dgl_mensagem" header="Mensagem" closable="true" resizable="false">
                         <h:panelGrid columns="3">
-                            <p:outputLabel value="#{usuarioBean.mensagem}" id="id_mensagem" />
+                            <p:outputLabel value="#{usuarioMB.mensagem}" id="id_mensagem" />
                             <p:commandButton value="OK" onclick="dgl_mensagem.hide()" type="button" />
                         </h:panelGrid>
                     </p:dialog>
