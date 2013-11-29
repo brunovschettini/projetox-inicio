@@ -117,7 +117,32 @@ public class UsuarioBean {
     public void excluir() {
         if (this.getUsuario().getId() != -1) {
             InterageDAO interageDAO = new InterageDAO();
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            UsuarioAdministrador usuarioAdministrador = usuarioDAO.usuarioAdministradorExiste(usuario);
             interageDAO.openTransaction();
+            if (usuarioAdministrador != null) {
+                if (!interageDAO.delete((UsuarioAdministrador) interageDAO.findObjectByID(usuarioAdministrador.getId(), "UsuarioAdministrador"))) {
+                    interageDAO.rollback();
+                    mensagem = "Erro ao excluir o registro!";
+                    return;
+                }
+            }
+            UsuarioEmpresa ue = usuarioDAO.usuarioEmpresaExiste(usuario);
+            if (ue != null) {
+                if (!interageDAO.delete(ue)) {
+                    interageDAO.rollback();
+                    mensagem = "Erro ao excluir o registro!";
+                    return;
+                }
+            }
+            UsuarioCliente uc = usuarioDAO.usuarioClienteExiste(usuario);
+            if (uc != null) {
+                if (!interageDAO.delete(uc)) {
+                    interageDAO.rollback();
+                    mensagem = "Erro ao excluir o registro!";
+                    return;
+                }
+            }
             if (interageDAO.delete((Usuario) interageDAO.findObjectByID(this.getUsuario().getId(), "Usuario"))) {
                 interageDAO.commit();
                 novo();

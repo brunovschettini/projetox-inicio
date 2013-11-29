@@ -82,6 +82,7 @@ public class InterageDAO extends DB {
         }
     }
 
+    @Deprecated 
     public Object findId(int id, String ob) {
         Object result = null;
         try {
