@@ -11,8 +11,8 @@ public class Cidade implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "DS_CIDADE", length = 50)
-    private String cidade;
+    @Column(name = "DS_DESCRICAO", length = 50)
+    private String descricao;
     @JoinColumn(name = "ID_ESTADO", referencedColumnName = "ID")
     @ManyToOne
     private Estado estado;
@@ -22,14 +22,14 @@ public class Cidade implements Serializable {
 
     public Cidade() {
         this.id = -1;
-        this.cidade = "";
+        this.descricao = "";
         this.estado = new Estado();
         this.subregiao = new Subregiao();
     }
 
-    public Cidade(int id, String cidade, Estado estado, Subregiao subregiao) {
+    public Cidade(int id, String descricao, Estado estado, Subregiao subregiao) {
         this.id = id;
-        this.cidade = cidade;
+        this.descricao = descricao;
         this.estado = estado;
         this.subregiao = subregiao;
     }
@@ -42,12 +42,12 @@ public class Cidade implements Serializable {
         this.id = id;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Estado getEstado() {

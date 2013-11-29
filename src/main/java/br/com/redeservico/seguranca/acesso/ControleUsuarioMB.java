@@ -8,7 +8,7 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class ControleUsuarioBean {
+public class ControleUsuarioMB {
     
     private Usuario usuario;
     private Usuario usuarioSessao = (Usuario) GenericaSessao.getObject("sessaoUsuario");
