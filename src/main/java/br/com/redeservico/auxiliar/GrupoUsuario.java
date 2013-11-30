@@ -13,20 +13,20 @@ public class GrupoUsuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID")
-    @ManyToMany
+    @ManyToOne
     private Usuario usuario;
     @Column(name = "DS_DESCRICAO", length = 50, nullable = false)
     private String descricao;
     @JoinColumn(name = "ID_CATEGORIA_1", referencedColumnName = "ID")
-    @ManyToMany
+    @ManyToOne
     private Categoria1 categoria1;
     @JoinColumn(name = "ID_CATEGORIA_2", referencedColumnName = "ID")
-    @ManyToMany
+    @ManyToOne
     private Categoria2 categoria2;
     @JoinColumn(name = "ID_CATEGORIA_3", referencedColumnName = "ID")
-    @ManyToMany
+    @ManyToOne
     private Categoria3 categoria3;
-    @Column(name = "IS_ATIVO")
+    @Column(name = "IS_ATIVO", columnDefinition = "BOOLEAN DEFAULT TRUE")
     private boolean ativo;
 
     public int getId() {
