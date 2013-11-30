@@ -12,7 +12,7 @@ public class Categoria3 implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JoinColumn(name = "ID_CATEGORIA_2", referencedColumnName = "ID")
-    @ManyToMany
+    @ManyToOne
     private Categoria2 categoria2;
     @Column(name = "DS_DESCRICAO", length = 50)
     private String descricao;
