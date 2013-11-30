@@ -21,18 +21,18 @@
                     <div class="font-title-spacing">
                         <p:outputLabel value="Pesquisar usuários" styleClass="font-title"  />
                     </div>
-                    <p:dataTable value="#{usuarioBean.listaUsuarios}" var="usuario" scrollHeight="400">
+                    <p:dataTable value="#{usuarioMB.listaUsuarios}" var="usuario" scrollHeight="400">
                         <p:column headerText="ID" width="50" styleClass="text-center">
-                            <p:commandLink action="#{usuarioBean.editarAdministrador(usuario)}" value="#{usuario.id}"/>
+                            <p:commandLink action="#{usuarioMB.editarAdministrador(usuario)}" value="#{usuario.id}"/>
                         </p:column> 
                         <p:column headerText="Login">
-                            <p:commandLink action="#{usuarioBean.editarAdministrador(usuario)}" value="#{usuario.login}"/>
+                            <p:commandLink action="#{usuarioMB.editarAdministrador(usuario)}" value="#{usuario.login}"/>
                         </p:column> 
                         <p:column headerText="Pessoa">
-                            <p:commandLink action="#{usuarioBean.editarAdministrador(usuario)}" value="#{usuario.pessoa.nome}"/>
+                            <p:commandLink action="#{usuarioMB.editarAdministrador(usuario)}" value="#{usuario.pessoa.nome}"/>
                         </p:column> 
                         <p:column headerText="Tipo de acesso" width="100" styleClass="text-center">
-                            <p:commandLink action="#{usuarioBean.editarAdministrador(usuario)}" value="#{usuario.tipoUsuarioAcesso.descricao}"/>
+                            <p:commandLink action="#{usuarioMB.editarAdministrador(usuario)}" value="#{usuario.tipoUsuarioAcesso.descricao}"/>
                         </p:column> 
                     </p:dataTable>                    
                 </h:form>                

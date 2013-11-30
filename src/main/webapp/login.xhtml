@@ -23,16 +23,16 @@
                             <h:panelGrid columns="2">
                                 <p:outputLabel value="Login *" for="id_login"/>
                                 <p:column>
-                                    <p:inputText value="#{controleAcessoBean.usuario.login}" id="id_login" maxlength="15" size="18"/>
+                                    <p:inputText value="#{controleAcessoMB.usuario.login}" id="id_login" maxlength="15" size="18"/>
                                     <p:watermark for="id_login" value="Nome de usuário" /> 
                                 </p:column>
                                 <p:outputLabel value="Senha *" for="id_senha"/>
                                 <p:column>
-                                    <p:inputText type="password" value="#{controleAcessoBean.usuario.senha}" id="id_senha" maxlength="15" size="18"  />
+                                    <p:inputText type="password" value="#{controleAcessoMB.usuario.senha}" id="id_senha" maxlength="15" size="18"  />
                                     <p:watermark for="id_senha" value="Senha" /> 
                                 </p:column>
                             </h:panelGrid>
-                            <p:commandButton value="Acessar" action="#{controleAcessoBean.login()}" styleClass="margin-top" update="id_messages"/>
+                            <p:commandButton value="Acessar" action="#{controleAcessoMB.login()}" styleClass="margin-top" update="id_messages"/>
                         </h:form>
                         
                         <h4 style="margin-top: 50px">Cadastrar</h4>

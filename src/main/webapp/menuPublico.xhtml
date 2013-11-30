@@ -19,12 +19,12 @@
                     <p:menuitem value="Login" url="login.xhtml" />
                 </p:submenu>
                 <f:facet name="options">
-                    <p:inputText value="#{controleAcessoBean.usuario.login}" id="id_login" maxlength="15" size="18"/>
+                    <p:inputText value="#{controleAcessoMB.usuario.login}" id="id_login" maxlength="15" size="18"/>
                     <p:watermark for="id_login" value="Nome de usuário" /> 
-                    <p:inputText type="password" value="#{controleAcessoBean.usuario.senha}" id="id_senha" maxlength="15" size="18" styleClass="margin-left"/>
+                    <p:inputText type="password" value="#{controleAcessoMB.usuario.senha}" id="id_senha" maxlength="15" size="18" styleClass="margin-left"/>
                     <p:watermark for="id_senha" value="Senha" /> 
-                    <p:commandButton value="Acessar" action="#{controleAcessoBean.login()}" styleClass="margin-top margin-left" update="id_messages" />
-                    <p:commandButton icon="ui-icon-extlink" title="Sair" styleClass="margin-left-max" action="#{controleAcessoBean.logout}"/>
+                    <p:commandButton value="Acessar" action="#{controleAcessoMB.login()}" styleClass="margin-top margin-left" update="id_messages" />
+                    <p:commandButton icon="ui-icon-extlink" title="Sair" styleClass="margin-left-max" action="#{controleAcessoMB.logout}"/>
                 </f:facet>  
             </p:menubar> 
         </h:form>
