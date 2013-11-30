@@ -16,16 +16,16 @@ public class Edicao implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID")
-    @ManyToMany
+    @ManyToOne
     private Usuario usuario;
     @JoinColumn(name = "ID_CATEGORIA_1", referencedColumnName = "ID")
-    @ManyToMany
+    @ManyToOne
     private Categoria1 categoria1;
     @JoinColumn(name = "ID_CATEGORIA_2", referencedColumnName = "ID")
-    @ManyToMany
+    @ManyToOne
     private Categoria2 categoria2;
     @JoinColumn(name = "ID_CATEGORIA_3", referencedColumnName = "ID")
-    @ManyToMany
+    @ManyToOne
     private Categoria3 categoria3;
     @Column(name = "DS_TITULO", length = 255)
     private String titulo;
@@ -33,9 +33,9 @@ public class Edicao implements Serializable {
     private String texto;
     @Column(name = "DS_AUTOR", length = 5000)
     private String autor;
-    @Column(name = "IS_CAPA")
+    @Column(name = "IS_CAPA", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean capa;
-    @Column(name = "IS_ATIVO")
+    @Column(name = "IS_ATIVO", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean ativo;
 
     public Edicao() {
