@@ -26,7 +26,7 @@ public class ServicoModeracao implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "DT_MODERADACAO")
     private Date dtModeracao;
-    @Column(name = "IS_MODERADO", columnDefinition = "true", nullable = false, updatable = true)
+    @Column(name = "IS_MODERADO", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean moderado;
     @Column(name = "DS_OBSERVACAO", length = 255)
     private String observacao;

@@ -28,7 +28,6 @@ public class ArquivoImagem implements Serializable {
         this.tipoImagem = new TipoImagem();
         this.largura = "";
         this.altura = "";
-
     }
 
     public ArquivoImagem(int id, DiretorioArquivo diretorioArquivo, TipoImagem tipoImagem, String largura, String altura) {

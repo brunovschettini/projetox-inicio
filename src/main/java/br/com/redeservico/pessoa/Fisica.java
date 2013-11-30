@@ -43,13 +43,6 @@ public class Fisica implements Serializable {
     private String pai;
     @Column(name = "DS_MAE", length = 100, nullable = false)
     private String mae;
-    @Column(name = "DS_NIT", length = 30, nullable = false)
-    private String nit;
-    @Column(name = "DS_PIS", length = 30, nullable = false)
-    private String pis;
-    @Temporal(TemporalType.DATE)
-    @Column(name = "DT_APOSENTADORIA")
-    private Date dtAposentadoria;
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_RECADASTRO")
     private Date dtRecadastro;
@@ -69,15 +62,11 @@ public class Fisica implements Serializable {
         this.estadoCivil = new EstadoCivil();
         this.pai = "";
         this.mae = "";
-        this.nit = "";
-        this.pis = "";
-        this.setAposentadoria("");
         this.setRecadastro(Data.data());
     }
 
     public Fisica(int id, Pessoa pessoa, String rg, String carteira, String serie, Sexo sexo, Date dtNascimento, String nacionalidade,
-            String naturalidade, String orgaoEmissaoRG, String ufEmissaoRG, EstadoCivil estadoCivil, String pai, String mae, String nit,
-            String pis, String aposentadoria, String recadastro, String dataFoto) {
+            String naturalidade, String orgaoEmissaoRG, String ufEmissaoRG, EstadoCivil estadoCivil, String pai, String mae, String recadastro, String dataFoto) {
         this.id = id;
         this.pessoa = pessoa;
         this.rg = rg;
@@ -92,9 +81,6 @@ public class Fisica implements Serializable {
         this.estadoCivil = estadoCivil;
         this.pai = pai;
         this.mae = mae;
-        this.nit = nit;
-        this.pis = pis;
-        this.setAposentadoria(aposentadoria);
         this.setRecadastro(recadastro);
     }
 
@@ -202,22 +188,6 @@ public class Fisica implements Serializable {
         this.mae = mae;
     }
 
-    public String getNit() {
-        return nit;
-    }
-
-    public void setNit(String nit) {
-        this.nit = nit;
-    }
-
-    public String getPis() {
-        return pis;
-    }
-
-    public void setPis(String pis) {
-        this.pis = pis;
-    }
-
     public Date getDtNascimento() {
         return dtNascimento;
     }
@@ -238,22 +208,6 @@ public class Fisica implements Serializable {
         if (!(nascimento.isEmpty())) {
             this.dtNascimento = Data.converte(nascimento);
         }
-    }
-
-    public Date getDtAposentadoria() {
-        return dtAposentadoria;
-    }
-
-    public void setDtAposentadoria(Date dtAposentadoria) {
-        this.dtAposentadoria = dtAposentadoria;
-    }
-
-    public String getAposentadoria() {
-        return Data.converteData(dtAposentadoria);
-    }
-
-    public void setAposentadoria(String aposentadoria) {
-        this.dtAposentadoria = Data.converte(aposentadoria);
     }
 
     public Date getDtRecadastro() {

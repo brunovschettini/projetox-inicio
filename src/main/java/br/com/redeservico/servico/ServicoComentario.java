@@ -30,7 +30,7 @@ public class ServicoComentario implements Serializable {
     private Date dtComentario;
     @Column(name = "DS_OBSERVACAO", length = 500)
     private String observacao;
-    @Column(name = "IS_ATIVO")
+    @Column(name = "IS_ATIVO", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean ativo;
 
     public ServicoComentario() {

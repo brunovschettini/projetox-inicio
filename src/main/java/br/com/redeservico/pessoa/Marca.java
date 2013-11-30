@@ -5,7 +5,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "PES_MARCA")
-@NamedQuery(name = "Marca.findById", query = "select mar from Marca mar where mar.id=:pid")
+@NamedQueries({
+    @NamedQuery(name = "Marca.findById", query = "SELECT MAR FROM Marca AS MAR WHERE MAR.id = :pid"),
+    @NamedQuery(name = "Marca.findAll", query = "SELECT MAR FROM Marca AS MAR ORDER BY MAR.fabricante.juridica.pessoa.nome ASC, MAR.descricao ASC"),
+    @NamedQuery(name = "Marca.findByName", query = "SELECT MAR FROM Marca AS MAR WHERE MAR.descricao LIKE :description ORDER BY MAR.fabricante.juridica.pessoa.nome ASC, MAR.descricao ASC")
+})
 public class Marca implements Serializable {
 
     @Id
