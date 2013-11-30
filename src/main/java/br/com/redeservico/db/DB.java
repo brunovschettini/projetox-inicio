@@ -5,8 +5,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-// import oracle.toplink.essentials.ejb.cmp3.EntityManagerFactoryProvider;
-
 @SessionScoped
 public class DB {
 
