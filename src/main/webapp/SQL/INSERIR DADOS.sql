@@ -1,3 +1,12 @@
+-- START
+
+INSERT INTO pes_pessoa(id, ds_nome, id_tipo_documento) SELECT 1, 'Administrador', '1' WHERE NOT EXISTS ( SELECT id FROM pes_pessoa WHERE id = 1);
+SELECT setval('pes_pessoa_id_seq', max(id)) FROM pes_pessoa;
+INSERT INTO seg_usuario(id, id_pessoa, ds_login, ds_senha, is_ativo, dt_cadastro) SELECT 1, 1, 'admin', '989899', true, current_date WHERE NOT EXISTS ( SELECT id FROM seg_usuario WHERE id = 1);
+SELECT setval('seg_usuario_id_seq', max(id)) FROM seg_usuario;
+
+
+
 -- sis_semana
 -- Criate: 2013-07-24
 -- Last edition: 2013-07-24 - by: Bruno Vieira
@@ -344,8 +353,6 @@ SELECT setval('pes_porte_id_seq', max(id)) FROM pes_porte;
 -- Criate: 2013-08-07
 -- Last edition: 2013-08-07 - by: Bruno Vieira
 
-INSERT INTO pes_pessoa(id, ds_nome, id_tipo_documento) SELECT 1, 'Administrador', '1' WHERE NOT EXISTS ( SELECT id FROM pes_pessoa WHERE id = 1);
-SELECT setval('pes_pessoa_id_seq', max(id)) FROM pes_pessoa;
 
 
 INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 1, 'Black Tie', 'black-tie', false  WHERE NOT EXISTS ( SELECT id FROM pes_tipo_endereco WHERE id = 1);
