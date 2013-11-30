@@ -27,7 +27,7 @@ public class Usuario implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_CADASTRO")
     private Date dtCadastro;
-    @Column(name = "IS_ATIVO")
+    @Column(name = "IS_ATIVO", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean ativo;
 
     public Usuario() {

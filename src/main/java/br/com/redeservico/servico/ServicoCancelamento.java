@@ -1,6 +1,7 @@
 package br.com.redeservico.servico;
 
 import br.com.redeservico.seguranca.Usuario;
+import br.com.redeservico.utilitarios.Data;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -25,5 +26,59 @@ public class ServicoCancelamento implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_CANCELAMENTO")
     private Date dtCancelamento;
+
+    public ServicoCancelamento() {
+        this.id = -1;
+        this.usuario = new Usuario();
+        this.servicoAgendamento = new ServicoAgendamento();
+        this.dtCancelamento = Data.dataHoje();
+    }
+
+    public ServicoCancelamento(int id, Usuario usuario, ServicoAgendamento servicoAgendamento, Date dtCancelamento) {
+        this.id = id;
+        this.usuario = usuario;
+        this.servicoAgendamento = servicoAgendamento;
+        this.dtCancelamento = dtCancelamento;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public ServicoMotivoCancelamento getMotivoCancelamento() {
+        return motivoCancelamento;
+    }
+
+    public void setMotivoCancelamento(ServicoMotivoCancelamento motivoCancelamento) {
+        this.motivoCancelamento = motivoCancelamento;
+    }
+
+    public ServicoAgendamento getServicoAgendamento() {
+        return servicoAgendamento;
+    }
+
+    public void setServicoAgendamento(ServicoAgendamento servicoAgendamento) {
+        this.servicoAgendamento = servicoAgendamento;
+    }
+
+    public Date getDtCancelamento() {
+        return dtCancelamento;
+    }
+
+    public void setDtCancelamento(Date dtCancelamento) {
+        this.dtCancelamento = dtCancelamento;
+    }
 
 }

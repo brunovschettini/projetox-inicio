@@ -18,7 +18,7 @@ public class UsuarioAcesso implements Serializable {
     @JoinColumn(name = "ID_PERMISSAO", referencedColumnName = "ID")
     @ManyToOne
     private Permissao permissao;
-    @Column(name = "IS_PERMITE")
+    @Column(name = "IS_PERMITE", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean permite;
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_EXPIRA")

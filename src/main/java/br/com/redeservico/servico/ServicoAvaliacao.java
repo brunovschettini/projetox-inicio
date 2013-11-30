@@ -23,7 +23,7 @@ public class ServicoAvaliacao implements Serializable {
     private String observacao;
     @Column(name = "NR_NOTA")
     private int nota;
-    @Column(name = "IS_ATIVO", columnDefinition = "true")
+    @Column(name = "IS_ATIVO", columnDefinition = "BOOLEAN DEFAULT TRUE")
     private boolean ativo;
 
     public ServicoAvaliacao() {

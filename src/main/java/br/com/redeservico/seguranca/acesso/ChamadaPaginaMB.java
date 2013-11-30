@@ -195,7 +195,7 @@ public class ChamadaPaginaMB {
     }
     
     public String login() {
-        GenericaSessao.remove("controleAcessoBean");
+        GenericaSessao.remove("controleAcessoMB");
         return "login";
     }
     
