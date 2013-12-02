@@ -5,6 +5,7 @@ import br.com.redeservico.seguranca.Usuario;
 import br.com.redeservico.seguranca.dao.RotinaDAO;
 import br.com.redeservico.utilitarios.GenericaSessao;
 import br.com.redeservico.utilitarios.MenuLinks;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean
 @SessionScoped
-public class ChamadaPaginaMB {
+public class ChamadaPaginaMB implements Serializable {
 
     private final Usuario usuarioSessao = (Usuario) GenericaSessao.getObject("sessaoUsuario");
     private List<MenuLinks> menuLinks = new ArrayList<MenuLinks>();
@@ -217,8 +218,8 @@ public class ChamadaPaginaMB {
         return metodoGenerico(1, "pesquisaUsuario");
     }
 
-    public String pesquisaFisica() {
-        return metodoGenerico(1, "pesquisaFisica");
+    public String pesquisaPessoaFisica() {
+        return metodoGenerico(1, "pesquisaPessoaFisica");
     }
 
     public List<MenuLinks> getMenuLinks() {
