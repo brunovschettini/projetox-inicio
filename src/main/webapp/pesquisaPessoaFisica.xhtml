@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Pesquisa Pessoa Física</title>
+        <ui:include src="templateAdmin.xhtml"/>
+    </h:head>
+    <h:body>
+        <div class="wrapper">
+            <div class="header">
+                <div class="logo"></div>
+            </div>
+            <div class="menu-top">
+                <ui:decorate template="/menuRedeServico.xhtml">
+                    <ui:define name="centro"></ui:define>
+                </ui:decorate>
+                <h:form id="form_pesquisa_pessoa_fisica">
+                    <div class="font-title-spacing">
+                        <p:outputLabel value="Pesquisa Pessoa Física" styleClass="font-title"  />
+                    </div>
+                    <h:panelGrid id="id_panel_grid_endereco">
+                        <p:dataTable value="#{fisicaMB.listaFisicas}" var="fisica">
+                            <p:column width="ID">
+                                <p:commandLink value="#{fisica.pessoa.id}" action="#{fisicaMB.editar(fisica)}" />
+                            </p:column>
+                            <p:column width="Nome">
+                                <p:commandLink value="#{fisica.pessoa.nome}" action="#{fisicaMB.editar(fisica)}" />
+                            </p:column>
+                            <p:column width="Documento">
+                                <p:commandLink value="#{fisica.pessoa.documento}" action="#{fisicaMB.editar(fisica)}" />
+                            </p:column>
+                            <p:column width="Nascimento">
+                                <p:commandLink value="#{fisica.nascimento}" action="#{fisicaMB.editar(fisica)}" />
+                            </p:column>            
+                        </p:dataTable>
+                    </h:panelGrid>
+                </h:form>                
+            </div>
+        </div>
+        <br />
+    </h:body>
+</html>
+
