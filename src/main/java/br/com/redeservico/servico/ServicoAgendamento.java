@@ -18,16 +18,16 @@ public class ServicoAgendamento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JoinColumn(name = "ID_HORARIO", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Horario horario;
     @JoinColumn(name = "ID_USUARIO_CLIENTE", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Usuario cliente;
     @JoinColumn(name = "ID_USUARIO_EMPRESA", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Usuario empresa;
     @JoinColumn(name = "ID_STATUS_AGENDAMENTO", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private StatusAgendamento statusAgendamento;
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_AGENDAMENTO")

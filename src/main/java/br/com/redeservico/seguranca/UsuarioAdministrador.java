@@ -18,7 +18,7 @@ public class UsuarioAdministrador implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID", nullable = false)
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     private Usuario usuario;
 
     public UsuarioAdministrador() {

@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "AUX_TIPO_CONTATO")
-@NamedQuery(name = "TipoContato.findById", query = "SELECR TC FROM TipoContato AS TC WHERE TC.id = :pid")
+@NamedQuery(name = "TipoContato.findById", query = "SELECT TC FROM TipoContato AS TC WHERE TC.id = :pid")
 public class TipoContato implements Serializable {
 
     @Id

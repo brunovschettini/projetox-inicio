@@ -14,7 +14,7 @@ public class Fisica implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
-    @OneToOne(fetch = FetchType.EAGER)//(optional=false)   (cascade=CascadeType.ALL)
+    @OneToOne//(optional=false)   (cascade=CascadeType.ALL)
     private Pessoa pessoa;
     @Column(name = "DS_RG", length = 12, nullable = false)
     private String rg;
@@ -23,7 +23,7 @@ public class Fisica implements Serializable {
     @Column(name = "DS_SERIE", length = 15, nullable = false)
     private String serie;
     @JoinColumn(name = "ID_SEXO", referencedColumnName = "ID")
-    @OneToOne(fetch = FetchType.EAGER)//(optional=false)   (cascade=CascadeType.ALL)
+    @OneToOne//(optional=false)   (cascade=CascadeType.ALL)
     private Sexo sexo;
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_NASCIMENTO")
@@ -37,7 +37,7 @@ public class Fisica implements Serializable {
     @Column(name = "DS_UF_EMISSAO_RG", length = 2, nullable = false)
     private String ufEmissaoRG;
     @JoinColumn(name = "ID_ESTADO_CIVIL", referencedColumnName = "ID")
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     private EstadoCivil estadoCivil;
     @Column(name = "DS_PAI", length = 100, nullable = false)
     private String pai;

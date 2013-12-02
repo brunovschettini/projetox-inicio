@@ -15,13 +15,13 @@ public class ServicoCancelamento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JoinColumn(name = "ID_USUARIO", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Usuario usuario;
     @JoinColumn(name = "ID_SERVICO_MOTIVO_CANCELAMENTO", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private ServicoMotivoCancelamento motivoCancelamento;
     @JoinColumn(name = "ID_SERVICO_AGENDAMENTO", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private ServicoAgendamento servicoAgendamento;
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_CANCELAMENTO")

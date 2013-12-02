@@ -19,7 +19,7 @@ public class Horario implements Serializable {
     @Column(name = "NR_QUANTIDADE", nullable = false)
     private int quantidade;
     @JoinColumn(name = "ID_SEMANA", referencedColumnName = "ID")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Semana semana;
     @Column(name = "ATIVO", nullable = true)
     private boolean ativo;

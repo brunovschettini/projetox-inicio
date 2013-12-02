@@ -11,10 +11,10 @@ public class ArquivoImagem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @JoinColumn(name = "ID", referencedColumnName = "ID_DIRETORIO_ARQUIVO")
+    @JoinColumn(name = "ID_DIRETORIO_ARQUIVO", referencedColumnName = "ID")
     @ManyToOne
     private DiretorioArquivo diretorioArquivo;
-    @JoinColumn(name = "ID", referencedColumnName = "ID_TIPO_IMAGEM")
+    @JoinColumn(name = "ID_TIPO_IMAGEM", referencedColumnName = "ID")
     @ManyToOne
     private TipoImagem tipoImagem;
     @Column(name = "NR_LARGURA", length = 3)

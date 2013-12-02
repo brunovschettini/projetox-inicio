@@ -1,8 +1,13 @@
 package br.com.redeservico.pessoa.beans;
 
 import br.com.redeservico.db.InterageDAO;
+import br.com.redeservico.endereco.Cidade;
+import br.com.redeservico.endereco.Estado;
+import br.com.redeservico.endereco.Logradouro;
+import br.com.redeservico.endereco.db.EnderecoDAO;
 import br.com.redeservico.pessoa.Fisica;
 import br.com.redeservico.pessoa.PessoaEndereco;
+import br.com.redeservico.pessoa.TipoEndereco;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +22,15 @@ public class FisicaMB implements Serializable {
     private Fisica fisica = new Fisica();
     private PessoaEndereco pessoaEndereco = new PessoaEndereco();
     private List<Fisica> listaFisicas = new ArrayList<Fisica>();
+    private List<PessoaEndereco> listaPessoaEnderecos = new ArrayList<PessoaEndereco>();
     private List<SelectItem> listaEstados = new ArrayList<SelectItem>();
     private List<SelectItem> listaCidades = new ArrayList<SelectItem>();
+    private List<SelectItem> listaLogradouros = new ArrayList<SelectItem>();
+    private List<SelectItem> listaTipoEndereco = new ArrayList<SelectItem>();
     private String mensagem = "";
     private int idCidade = 0;
+    private int idTipoEndereco = 0;
+    private int idLogradouro = 0;
     private int idEstado = 0;
     
     public void salvar() {
@@ -135,6 +145,13 @@ public class FisicaMB implements Serializable {
     }
 
     public List<SelectItem> getListaEstados() {
+        if (listaEstados.isEmpty()) {
+            InterageDAO interageDAO = new InterageDAO();
+            List<Estado> list = (List<Estado>) interageDAO.findAll("Estado");
+            for (int i = 0; i < list.size(); i++) {
+                listaEstados.add(new SelectItem(new Integer(i), list.get(i).getDescricao(), Integer.toString(list.get(i).getId())));
+            }
+        }        
         return listaEstados;
     }
 
@@ -143,10 +160,71 @@ public class FisicaMB implements Serializable {
     }
 
     public List<SelectItem> getListaCidades() {
+        if (listaCidades.isEmpty()) {
+            EnderecoDAO enderecoDAO = new EnderecoDAO();
+            List<Cidade> list = (List<Cidade>) enderecoDAO.pesquisaCidadesPorEstado(Integer.parseInt(listaEstados.get(idEstado).getDescription()));
+            for (int i = 0; i < list.size(); i++) {
+                listaCidades.add(new SelectItem(new Integer(i), list.get(i).getDescricao(), Integer.toString(list.get(i).getId())));
+            }
+        }          
         return listaCidades;
     }
 
     public void setListaCidades(List<SelectItem> listaCidades) {
         this.listaCidades = listaCidades;
+    }
+
+    public List<PessoaEndereco> getListaPessoaEnderecos() {
+        return listaPessoaEnderecos;
+    }
+
+    public void setListaPessoaEnderecos(List<PessoaEndereco> listaPessoaEnderecos) {
+        this.listaPessoaEnderecos = listaPessoaEnderecos;
+    }
+
+    public List<SelectItem> getListaLogradouros() {
+        if (listaLogradouros.isEmpty()) {
+            InterageDAO interageDAO = new InterageDAO();
+            List<Logradouro> list = (List<Logradouro>) interageDAO.findAll("Logradouro");
+            for (int i = 0; i < list.size(); i++) {
+                listaLogradouros.add(new SelectItem(new Integer(i), list.get(i).getDescricao(), Integer.toString(list.get(i).getId())));
+            }
+        }            
+        return listaLogradouros;
+    }
+
+    public void setListaLogradouros(List<SelectItem> listaLogradouros) {
+        this.listaLogradouros = listaLogradouros;
+    }
+
+    public List<SelectItem> getListaTipoEndereco() {
+        if (listaTipoEndereco.isEmpty()) {
+            InterageDAO interageDAO = new InterageDAO();
+            List<TipoEndereco> list = (List<TipoEndereco>) interageDAO.findAll("TipoEndereco");
+            for (int i = 0; i < list.size(); i++) {
+                listaEstados.add(new SelectItem(new Integer(i), list.get(i).getDescricao(), Integer.toString(list.get(i).getId())));
+            }
+        }          
+        return listaTipoEndereco;
+    }
+
+    public void setListaTipoEndereco(List<SelectItem> listaTipoEndereco) {
+        this.listaTipoEndereco = listaTipoEndereco;
+    }
+
+    public int getIdTipoEndereco() {          
+        return idTipoEndereco;
+    }
+
+    public void setIdTipoEndereco(int idTipoEndereco) {
+        this.idTipoEndereco = idTipoEndereco;
+    }
+
+    public int getIdLogradouro() {
+        return idLogradouro;
+    }
+
+    public void setIdLogradouro(int idLogradouro) {
+        this.idLogradouro = idLogradouro;
     }
 }

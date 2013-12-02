@@ -1,10 +1,3 @@
--- START
-
-INSERT INTO pes_pessoa(id, ds_nome, id_tipo_documento) SELECT 1, 'Administrador', '1' WHERE NOT EXISTS ( SELECT id FROM pes_pessoa WHERE id = 1);
-SELECT setval('pes_pessoa_id_seq', max(id)) FROM pes_pessoa;
-INSERT INTO seg_usuario(id, id_pessoa, ds_login, ds_senha, is_ativo, dt_cadastro) SELECT 1, 1, 'admin', '989899', true, current_date WHERE NOT EXISTS ( SELECT id FROM seg_usuario WHERE id = 1);
-SELECT setval('seg_usuario_id_seq', max(id)) FROM seg_usuario;
-
 
 
 -- sis_semana
@@ -372,3 +365,13 @@ INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 14, 
 INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 15, 'Trontastic', 'trontastic', false  WHERE NOT EXISTS ( SELECT id FROM sis_temas WHERE id = 15);
 INSERT INTO sis_temas (id, ds_descricao, ds_identificador, is_ativo) SELECT 16, 'Vader', 'vader', false  WHERE NOT EXISTS ( SELECT id FROM sis_temas WHERE id = 16);
 SELECT setval('sis_temas_id_seq', max(id)) FROM sis_temas;
+
+
+-- START
+
+INSERT INTO pes_pessoa(id, ds_nome, id_tipo_documento) SELECT 1, 'Administrador', '1' WHERE NOT EXISTS ( SELECT id FROM pes_pessoa WHERE id = 1);
+SELECT setval('pes_pessoa_id_seq', max(id)) FROM pes_pessoa;
+INSERT INTO seg_usuario(id, id_pessoa, ds_login, ds_senha, is_ativo, dt_cadastro, id_tipo_usuario_acesso) SELECT 1, 1, 'admin', '989899', true, current_date, 1 WHERE NOT EXISTS ( SELECT id FROM seg_usuario WHERE id = 1);
+SELECT setval('seg_usuario_id_seq', max(id)) FROM seg_usuario;
+INSERT INTO seg_usuario_administrador(id, id_usuario) SELECT 1, 1 WHERE NOT EXISTS ( SELECT id FROM seg_usuario_administrador WHERE id = 1);
+SELECT setval('seg_usuario_administrador_id_seq', max(id)) FROM seg_usuario_administrador;

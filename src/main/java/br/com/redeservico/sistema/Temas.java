@@ -15,17 +15,21 @@ public class Temas implements Serializable {
     private String descricao;
     @Column(name = "DS_IDENTIFICADOR", length = 15, unique = true)
     private String identificador;
+    @Column(name = "IS_ATIVO")
+    private boolean ativo;
 
     public Temas() {
         this.id = -1;
         this.descricao = "";
         this.identificador = "";
+        this.ativo = true;
     }
 
-    public Temas(int id, String descricao, String identificador) {
+    public Temas(int id, String descricao, String identificador, boolean ativo) {
         this.id = id;
         this.descricao = descricao;
         this.identificador = identificador;
+        this.ativo = ativo;
     }
 
     public int getId() {
@@ -50,5 +54,13 @@ public class Temas implements Serializable {
 
     public void setIdentificador(String identificador) {
         this.identificador = identificador;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }

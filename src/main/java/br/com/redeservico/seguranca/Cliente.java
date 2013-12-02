@@ -27,7 +27,7 @@
 //    @Column(name = "DS_CODIGO", length = 100)
 //    private String codigo;
 //    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID", nullable = false)
-//    @OneToOne(fetch = FetchType.EAGER)
+//    @OneToOne
 //    private Pessoa pessoa;
 //    @Column(name = "DT_CADASTRO")
 //    @Temporal(TemporalType.DATE)
