@@ -23,7 +23,7 @@ public class PessoaEndereco implements Serializable {
     private Pessoa pessoa;
     @Column(name = "DS_NUMERO", length = 30, nullable = false)
     private String numero;
-    @Column(name = "DS_COMPLEMENTO", length = 50, nullable = true)
+    @Column(name = "DS_COMPLEMENTO", length = 50)
     private String complemento;
     @Column(name = "IS_PRINCIPAL", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean principal;

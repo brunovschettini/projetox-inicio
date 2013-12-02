@@ -161,10 +161,10 @@ public class EnderecoDAO extends DB {
         return null;
     }
 
-    public List<Endereco> pesquisaEnderecosPorCEP(Endereco endereco) {
+    public List<Endereco> pesquisaEnderecosPorCEP(String cep) {
         try {
-            Query query = getEntityManager().createQuery("SELECT E FROM Endereco AS E WHERE E.cep = :cep ORDER BY C.estado.descricao ASC, C.descricao ASC ");
-            query.setParameter("cep", endereco.getCep());
+            Query query = getEntityManager().createQuery("SELECT E FROM Endereco AS E WHERE E.cep = :cep ");
+            query.setParameter("cep", cep);
             List list = query.getResultList();
             if (!list.isEmpty()) {
                 return list;
