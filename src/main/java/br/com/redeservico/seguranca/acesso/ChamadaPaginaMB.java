@@ -24,7 +24,7 @@ public class ChamadaPaginaMB {
     private int tipoPagina = 0;
     private String urlAtual = "";
     private HttpServletRequest paginaRequerida = null;
-    
+
     public String metodoGenerico(int tipo, String pagina) {
         paginaRequerida = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         urlAtual = converteURL(paginaRequerida.getRequestURI());
@@ -34,15 +34,15 @@ public class ChamadaPaginaMB {
         tipoPagina = tipo;
         return pagina;
     }
-    
+
     public String getHistoricoMenu() {
         String urlDestino = ((HttpServletRequest) (FacesContext.getCurrentInstance().getExternalContext().getRequest())).getRequestURI();
         String linkAtual = converteURL(urlDestino);
-        String linkRetorno = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("urlRetorno");        
+        String linkRetorno = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("urlRetorno");
         getHistoricoMenu(urlDestino, linkAtual, linkRetorno);
         return null;
     }
-    
+
     public void getHistoricoMenu(String urlDestino, String linkAtual, String linkRetorno) {
         try {
             if (linkRetorno == null) {
@@ -193,32 +193,32 @@ public class ChamadaPaginaMB {
         } catch (Exception e) {
         }
     }
-    
+
     public String login() {
         GenericaSessao.remove("controleAcessoMB");
+        menuLinks.clear();
         return "login";
     }
-    
+
     public String usuarioAdministrador() {
         GenericaSessao.remove("usuarioMB");
         GenericaSessao.remove("pesquisaPessoaMB");
-        return "usuarioAdministrador";
+        return metodoGenerico(2, "usuarioAdministrador");
     }
-    
+
     public String pessoaFisica() {
-        GenericaSessao.remove("pessoaFisicaMB");
+        GenericaSessao.remove("fisicaMB");
         GenericaSessao.remove("pesquisaPessoaFisicaMB");
-        return "pessoaFisica";
+        return metodoGenerico(2, "pessoaFisica");
     }
-    
+
     // PESQUISAS
-    
     public String pesquisaUsuario() {
-        return "pesquisaUsuario";
+        return metodoGenerico(1, "pesquisaUsuario");
     }
-    
+
     public String pesquisaFisica() {
-        return "pesquisaFisica";
+        return metodoGenerico(1, "pesquisaFisica");
     }
 
     public List<MenuLinks> getMenuLinks() {
@@ -250,7 +250,7 @@ public class ChamadaPaginaMB {
         this.nivelLink = i + 1;
         menuLinks.get(i).setIndice(i);
         return this.menuLinks.get(i).getLink();
-    }    
+    }
 
     // Lista Breadcrumbs e Menu url de retornos de páginas
     public String converteURLNome(String stringURL) {
