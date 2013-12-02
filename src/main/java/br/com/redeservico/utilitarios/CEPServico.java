@@ -17,9 +17,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 
 public class CEPServico {
 
@@ -33,110 +32,113 @@ public class CEPServico {
      * @param cep
      */
     public void procurar() {
-        if (cepMemoria.equals(cep)) {
-            return;
-        }
-        if (cepMemoria.equals("")) {
-            cepMemoria = cep;
-        }
-        //  filialDep = request.getRequestURL().toString();
-        // filialDep = requestFilial.getQueryString();
-        String urlString = "http://cep.republicavirtual.com.br/web_cep.php?cep=" + cep + "&formato=query_string";
-        // os parametros a serem enviados
-        Properties parameters = new Properties();
-        parameters.setProperty("cep", cep);
-        parameters.setProperty("formato", "xml");
-
-        // o iterador, para criar a URL
-        Iterator i = parameters.keySet().iterator();
-        // o contador
-        int counter = 0;
-
-        // enquanto ainda existir parametros
-        while (i.hasNext()) {
-            String name = (String) i.next();
-            String value = parameters.getProperty(name);
-            urlString += (++counter == 1 ? "?" : "&") + name + "=" + value;
-        }
-        try {
-            URL url = new URL(urlString);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("Request-Method", "GET");
-            connection.setDoInput(true);
-            connection.setDoOutput(false);
-            connection.connect();
-            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuffer newData = new StringBuffer();
-            String s = "";
-            while (null != ((s = br.readLine()))) {
-                newData.append(s);
+        EnderecoDAO enderecoDAO = new EnderecoDAO();
+        List<Endereco> listaEnderecos = (List<Endereco>) enderecoDAO.pesquisaEnderecosPorCEP(cep);
+        if (listaEnderecos.isEmpty()) {            
+            if (cepMemoria.equals(cep)) {
+                return;
             }
-            br.close();
-            // Controi classe a partir do XML 
-            XStream xstream = new XStream(new DomDriver());
-            Annotations.configureAliases(xstream, CepAlias.class);
-            xstream.alias("webservicecep", CepAlias.class);
-            CepAlias cepAlias = (CepAlias) xstream.fromXML(newData.toString());
-            EnderecoDAO enderecoDAO = new EnderecoDAO();
-            InterageDAO interageDAO = new InterageDAO();
-            Estado estado = enderecoDAO.pesquisaEstadoPorDescricao(cepAlias.getUf());
-            if (estado == null) {
-                estado = new Estado();
-                estado.setSigla(cepAlias.getUf());
-                interageDAO.openTransaction();
-                if (interageDAO.insert(estado)) {
-                    interageDAO.commit();
-                } else {
-                    interageDAO.rollback();
-                    return;
-                }
-            }            
-            Cidade cidade = enderecoDAO.pesquisaCidadeEstadoPorDescricao(cepAlias.getCidade(), estado.getId());
-            if (cidade == null) {
-                cidade = new Cidade();
-                cidade.setDescricao(cepAlias.getCidade());
-                cidade.setSubregiao((Subregiao) interageDAO.findObjectByID(1, "Subregiao"));
-                cidade.setEstado(estado);
-                interageDAO.openTransaction();
-                if (interageDAO.insert(cidade)) {
-                    interageDAO.commit();
-                } else {
-                    interageDAO.rollback();
-                    return;
-                }
+            if (cepMemoria.equals("")) {
+                cepMemoria = cep;
             }
-            Logradouro logradouro = enderecoDAO.pesquisaLogradouroPorDescricao(cepAlias.getTipo_logradouro());
-            if (logradouro == null) {
-                logradouro = new Logradouro();
-                logradouro.setDescricao(cepAlias.getTipo_logradouro());
-                interageDAO.openTransaction();
-                if (interageDAO.insert(logradouro)) {
-                    interageDAO.commit();
-                } else {
-                    interageDAO.rollback();
-                    return;
-                }
+            String urlString = "http://cep.republicavirtual.com.br/web_cep.php?cep=" + cep + "&formato=query_string";
+            // os parametros a serem enviados
+            Properties parameters = new Properties();
+            parameters.setProperty("cep", cep);
+            parameters.setProperty("formato", "xml");
+            Iterator i = parameters.keySet().iterator();
+            int counter = 0;
+            while (i.hasNext()) {
+                String name = (String) i.next();
+                String value = parameters.getProperty(name);
+                urlString += (++counter == 1 ? "?" : "&") + name + "=" + value;
             }
-            endereco = new Endereco();
-            endereco.setCep(cep);
-            endereco.setBairro(cepAlias.getBairro());
-            endereco.setCidade(cidade);
-            endereco.setDescricaoEndereco(cepAlias.getLogradouro());
-            endereco.setLogradouro(logradouro);
-            Endereco enderecox = enderecoDAO.enderecoExiste(endereco);
-            if (enderecox == null) {
-                interageDAO.openTransaction();
-                if (interageDAO.insert(endereco)) {
-                    interageDAO.commit();
-                } else {
-                    interageDAO.rollback();
+            try {
+                URL url = new URL(urlString);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestProperty("Request-Method", "GET");
+                connection.setDoInput(true);
+                connection.setDoOutput(false);
+                connection.connect();
+                BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuffer newData = new StringBuffer();
+                String s = "";
+                while (null != ((s = br.readLine()))) {
+                    newData.append(s);
                 }
-            } else {
+                br.close();
+                XStream xstream = new XStream(new DomDriver());
+                Annotations.configureAliases(xstream, CepAlias.class);
+                xstream.alias("webservicecep", CepAlias.class);
+                CepAlias cepAlias = (CepAlias) xstream.fromXML(newData.toString());            
+                InterageDAO interageDAO = new InterageDAO();
+                Estado estado = enderecoDAO.pesquisaEstadoPorDescricao(cepAlias.getUf());
+                if (estado == null) {
+                    estado = new Estado();
+                    estado.setSigla(cepAlias.getUf());
+                    interageDAO.openTransaction();
+                    if (interageDAO.insert(estado)) {
+                        interageDAO.commit();
+                    } else {
+                        interageDAO.rollback();
+                        return;
+                    }
+                }            
+                Cidade cidade = enderecoDAO.pesquisaCidadeEstadoPorDescricao(cepAlias.getCidade(), estado.getId());
+                if (cidade == null) {
+                    cidade = new Cidade();
+                    cidade.setDescricao(cepAlias.getCidade());
+                    cidade.setSubregiao((Subregiao) interageDAO.findObjectByID(1, "Subregiao"));
+                    cidade.setEstado(estado);
+                    interageDAO.openTransaction();
+                    if (interageDAO.insert(cidade)) {
+                        interageDAO.commit();
+                    } else {
+                        interageDAO.rollback();
+                        return;
+                    }
+                }
+                Logradouro logradouro = enderecoDAO.pesquisaLogradouroPorDescricao(cepAlias.getTipo_logradouro());
+                if (logradouro == null) {
+                    logradouro = new Logradouro();
+                    logradouro.setDescricao(cepAlias.getTipo_logradouro());
+                    interageDAO.openTransaction();
+                    if (interageDAO.insert(logradouro)) {
+                        interageDAO.commit();
+                    } else {
+                        interageDAO.rollback();
+                        return;
+                    }
+                }
                 endereco = new Endereco();
-                endereco = enderecox;
+                endereco.setCep(cep);
+                endereco.setBairro(cepAlias.getBairro());
+                endereco.setCidade(cidade);
+                endereco.setDescricaoEndereco(cepAlias.getLogradouro());
+                endereco.setLogradouro(logradouro);
+                Endereco enderecox = enderecoDAO.enderecoExiste(endereco);
+                if (enderecox == null) {
+                    interageDAO.openTransaction();
+                    if (interageDAO.insert(endereco)) {
+                        interageDAO.commit();
+                    } else {
+                        interageDAO.rollback();
+                    }
+                } else {
+                    endereco = new Endereco();
+                    endereco = enderecox;
+                }
+            } catch (IOException e) {
+            }            
+        } else {
+            endereco = new Endereco();
+            if(listaEnderecos.size() == 1) {
+                endereco = listaEnderecos.get(0);
+            } else {
+                endereco.setBairro(listaEnderecos.get(0).getBairro());
             }
-        } catch (IOException e) {
         }
+        cep = "";
     }
 
     public Endereco getEndereco() {
