@@ -4,6 +4,7 @@ import br.com.redeservico.db.DB;
 import br.com.redeservico.endereco.Cidade;
 import br.com.redeservico.endereco.Endereco;
 import br.com.redeservico.endereco.Estado;
+import br.com.redeservico.endereco.Logradouro;
 import br.com.redeservico.endereco.Regiao;
 import br.com.redeservico.endereco.Subregiao;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class EnderecoDAO extends DB {
 
     public Cidade pesquisaCidadeEstado(Cidade cidade) {
         try {
-            Query query = getEntityManager().createQuery("SELECT C FROM Cidade AS C WHERE C.cidade = :cidade AND C.estado.id = :estado ");
+            Query query = getEntityManager().createQuery("SELECT C FROM Cidade AS C WHERE C.id = :cidade AND C.estado.id = :estado ");
             query.setParameter("cidade", cidade);
             query.setParameter("estado", cidade.getEstado().getId());
             List list = query.getResultList();
@@ -46,9 +47,37 @@ public class EnderecoDAO extends DB {
         return null;
     }
 
+    public Cidade pesquisaCidadeEstadoPorDescricao(String descricaoCidade, int idEstado) {
+        try {
+            Query query = getEntityManager().createQuery("SELECT C FROM Cidade AS C WHERE UPPER(C.descricao) = :descricaoCidade AND C.estado.id = :estado ");
+            query.setParameter("descricaoCidade", descricaoCidade.toUpperCase());
+            query.setParameter("estado", idEstado);
+            List list = query.getResultList();
+            if (!list.isEmpty()) {
+                return (Cidade) query.getSingleResult();
+            }
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+
+    public Logradouro pesquisaLogradouroPorDescricao(String descricaoLogradouro) {
+        try {
+            Query query = getEntityManager().createQuery("SELECT L FROM Logradouro AS L WHERE UPPER(L.descricao) = :descricaoLogradouro ");
+            query.setParameter("descricaoLogradouro", descricaoLogradouro.toUpperCase());
+            List list = query.getResultList();
+            if (!list.isEmpty()) {
+                return (Logradouro) query.getSingleResult();
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
     public List<Cidade> pesquisaCidadesPorEstado(int idEstado) {
         try {
-            Query query = getEntityManager().createQuery("SELECT C FROM Cidade AS C WHERE C.estado.id = :estado ORDER BY C.estado.descricao ASC, C.descricao "+cidadeOrder);
+            Query query = getEntityManager().createQuery("SELECT C FROM Cidade AS C WHERE C.estado.id = :estado ORDER BY C.estado.descricao ASC, C.descricao " + cidadeOrder);
             query.setParameter("estado", idEstado);
             List list = query.getResultList();
             if (!list.isEmpty()) {
@@ -79,6 +108,21 @@ public class EnderecoDAO extends DB {
         try {
             Query query = getEntityManager().createQuery("SELECT C FROM Cidade AS C WHERE C.id = :cidade");
             query.setParameter("cidade", cidade.getId());
+            List list = query.getResultList();
+            if (!list.isEmpty()) {
+                return (Estado) query.getSingleResult();
+            }
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+
+    public Estado pesquisaEstadoPorDescricao(String descricaoEstado) {
+        try {
+            Query query = getEntityManager().createQuery("SELECT E FROM Estado AS E WHERE UPPER(E.descricao) = :descricaoEstado OR UPPER(E.sigla) = :descricaoUF");
+            query.setParameter("descricaoEstado", descricaoEstado.toUpperCase());
+            query.setParameter("descricaoUF", descricaoEstado.toUpperCase());
             List list = query.getResultList();
             if (!list.isEmpty()) {
                 return (Estado) query.getSingleResult();
@@ -144,6 +188,22 @@ public class EnderecoDAO extends DB {
 
         }
         return new ArrayList();
+    }
+
+    public Endereco enderecoExiste(Endereco endereco) {
+        try {
+            Query query = getEntityManager().createQuery("SELECT E FROM Endereco AS E WHERE E.cep = :cep AND E.cidade.id = :cidade AND E.logradouro.id = :logradouro AND UPPER(E.descricaoEndereco) = :descricaoEndereco AND UPPER(E.bairro) = :bairro ");
+            query.setParameter("cep", endereco.getCep());
+            query.setParameter("cidade", endereco.getCidade().getId());
+            query.setParameter("logradouro", endereco.getLogradouro().getId());
+            query.setParameter("descricaoEndereco", endereco.getDescricaoEndereco().toUpperCase());
+            query.setParameter("bairro", endereco.getBairro().toUpperCase());
+            List list = query.getResultList();
+            if (!list.isEmpty()) {
+                return (Endereco) query.getSingleResult();
+            }
+        } catch (Exception e) {}
+        return null;
     }
 
     public String getCidadeOrder() {
