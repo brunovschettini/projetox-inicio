@@ -8,6 +8,8 @@ import br.com.redeservico.endereco.db.EnderecoDAO;
 import br.com.redeservico.pessoa.Fisica;
 import br.com.redeservico.pessoa.PessoaEndereco;
 import br.com.redeservico.pessoa.TipoEndereco;
+import br.com.redeservico.pessoa.db.PessoaEnderecoDAO;
+import br.com.redeservico.utilitarios.CEPServico;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -161,12 +163,13 @@ public class FisicaMB implements Serializable {
 
     public List<SelectItem> getListaCidades() {
         if (listaCidades.isEmpty()) {
+            listaCidades.add(new SelectItem(new Integer(0), "", ""));
             EnderecoDAO enderecoDAO = new EnderecoDAO();
             List<Cidade> list = (List<Cidade>) enderecoDAO.pesquisaCidadesPorEstado(Integer.parseInt(listaEstados.get(idEstado).getDescription()));
             for (int i = 0; i < list.size(); i++) {
                 listaCidades.add(new SelectItem(new Integer(i), list.get(i).getDescricao(), Integer.toString(list.get(i).getId())));
             }
-        }          
+        }
         return listaCidades;
     }
 
@@ -199,10 +202,10 @@ public class FisicaMB implements Serializable {
 
     public List<SelectItem> getListaTipoEndereco() {
         if (listaTipoEndereco.isEmpty()) {
-            InterageDAO interageDAO = new InterageDAO();
-            List<TipoEndereco> list = (List<TipoEndereco>) interageDAO.findAll("TipoEndereco");
+            PessoaEnderecoDAO pessoaEnderecoDAO = new PessoaEnderecoDAO();
+            List<TipoEndereco> list = (List<TipoEndereco>) pessoaEnderecoDAO.listaTipoEnderecoDisponivelPessoa(fisica.getPessoa().getId(), 1);
             for (int i = 0; i < list.size(); i++) {
-                listaEstados.add(new SelectItem(new Integer(i), list.get(i).getDescricao(), Integer.toString(list.get(i).getId())));
+                listaTipoEndereco.add(new SelectItem(new Integer(i), list.get(i).getDescricao(), Integer.toString(list.get(i).getId())));
             }
         }          
         return listaTipoEndereco;
@@ -226,5 +229,11 @@ public class FisicaMB implements Serializable {
 
     public void setIdLogradouro(int idLogradouro) {
         this.idLogradouro = idLogradouro;
+    }
+    
+    public void pesquisaCEP() {
+        CEPServico cEPServico = new CEPServico();
+        cEPServico.setCep(pessoaEndereco.getEndereco().getCep()); 
+        cEPServico.procurar();
     }
 }
