@@ -375,3 +375,57 @@ INSERT INTO seg_usuario(id, id_pessoa, ds_login, ds_senha, is_ativo, dt_cadastro
 SELECT setval('seg_usuario_id_seq', max(id)) FROM seg_usuario;
 INSERT INTO seg_usuario_administrador(id, id_usuario) SELECT 1, 1 WHERE NOT EXISTS ( SELECT id FROM seg_usuario_administrador WHERE id = 1);
 SELECT setval('seg_usuario_administrador_id_seq', max(id)) FROM seg_usuario_administrador;
+
+
+-- end_regiao
+-- Criate: 2013-08-07
+-- Last edition: 2013-08-07 - by: Bruno Vieira
+INSERT INTO end_regiao(id, ds_descricao ) VALUES (1, 'Centro-Oeste'), (2, 'Nordeste'),(3, 'Norte'),(4, 'Sudeste'),(5, 'Sul');
+
+-- end_subregiao
+-- Criate: 2013-08-07
+-- Last edition: 2013-08-07 - by: Bruno Vieira
+INSERT INTO end_subregiao (id, ds_descricao) VALUES (1, "");
+
+-- end_estado
+-- Criate: 2013-08-07
+-- Last edition: 2013-08-07 - by: Bruno Vieira
+
+INSERT INTO end_estado (id, id_regiao, ds_sigla, ds_descricao)
+                        VALUES  (1, 3, 'AC', 'Acre'),
+                                (2, 2, 'AL', 'Alagoas'),
+                                (3, 3, 'AM', 'Amazonas'),
+                                (4, 3, 'AP', 'Amapá'),
+                                (5, 2, 'BA', 'Bahia'),
+                                (6, 2, 'CE', 'Ceará'),
+                                (7, 1, 'DF', 'Distrito Federal'),
+                                (8, 4, 'ES', 'Espirito Santo'),
+                                (9, 1, 'GO', 'Goiás'),
+                                (10, 2, 'MA', 'Maranhão'),
+                                (11, 4, 'MG', 'Mina Gerais'),
+                                (12, 1, 'MT', 'Mato Grosso'),
+                                (13, 1, 'MS', 'Mato Grosso do Sul'),
+                                (14, 3, 'PA', 'Pará'),
+                                (15, 2, 'PB', 'Paraíba'),
+                                (16, 2, 'PE', 'Pernambuco'),
+                                (17, 2, 'PI', 'Piauí'),
+                                (18, 5, 'PR', 'Paraná'),
+                                (19, 4, 'RJ', 'Rio de Janeiro'),
+                                (20, 2, 'RN', 'Rio Grande do Norte'),
+                                (21, 3, 'RO', 'Rondônia'),
+                                (22, 3, 'RR', 'Roraíma'),
+                                (23, 5, 'RS', 'Rio Grande do Sul'),
+                                (24, 5, 'SC', 'Santa Catarina'),
+                                (25, 2, 'SE', 'Sergipe'),
+                                (26, 4, 'SP', 'São Paulo'),
+                                (27, 3, 'TO', 'Tocantins');
+
+-- pes_sexo
+-- Criate: 2013-08-07
+-- Last edition: 2013-08-07 - by: Bruno Vieira
+INSERT INTO pes_sexo (id, ds_descricao) VALUES (1, ''), (2, 'MASCULINO'),(3, 'FEMININO');
+
+-- pes_estado_civil 
+-- Criate: 2013-08-07
+-- Last edition: 2013-08-07 - by: Bruno Vieira
+INSERT INTO pes_estado_civil (id, ds_descricao) VALUES (1, ''), (2, 'SOLTEIRO(a)'), (3, 'CASADO(a)'), (4, 'DESQUITADO(a)'), (5, 'VIÚVO(a)');
