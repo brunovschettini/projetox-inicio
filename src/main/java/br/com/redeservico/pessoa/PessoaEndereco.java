@@ -25,6 +25,8 @@ public class PessoaEndereco implements Serializable {
     private String numero;
     @Column(name = "DS_COMPLEMENTO", length = 50, nullable = true)
     private String complemento;
+    @Column(name = "IS_PRINCIPAL", columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean principal;
 
     public PessoaEndereco() {
         this.id = -1;
@@ -33,15 +35,17 @@ public class PessoaEndereco implements Serializable {
         this.pessoa = new Pessoa();
         this.numero = "";
         this.complemento = "";
+        this.principal = principal;
     }
 
-    public PessoaEndereco(int id, Endereco endereco, TipoEndereco tipoEndereco, Pessoa pessoa, String numero, String complemento) {
+    public PessoaEndereco(int id, Endereco endereco, TipoEndereco tipoEndereco, Pessoa pessoa, String numero, String complemento, boolean principal) {
         this.id = id;
         this.endereco = endereco;
         this.tipoEndereco = tipoEndereco;
         this.pessoa = pessoa;
         this.numero = numero;
         this.complemento = complemento;
+        this.principal = principal;
     }
 
     public int getId() {
@@ -91,16 +95,12 @@ public class PessoaEndereco implements Serializable {
     public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
+    
+    public boolean isPrincipal() {
+        return principal;
+    }
 
-    /* public String getEnderecoToString(){
-     String result = this.getEndereco().getLogradouro().getLogradouro() + " " +
-     this.getEndereco().getDescricaoEndereco().getDescricaoEndereco() + ", " +
-     this.getEndereco().getBairro().getBairro() + ", " +
-     this.getEndereco().getCidade().getCidade() + "  -  "  +
-     this.getEndereco().getCidade().getUf() + "  ";
-     if (!(this.complemento.equals(""))){
-
-     }
-     return result;
-     }*/
+    public void setPrincipal(boolean principal) {
+        this.principal = principal;
+    }
 }

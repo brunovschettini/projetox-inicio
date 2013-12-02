@@ -40,5 +40,15 @@
             <to-view-id>/adminSite.jsf</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>pessoaFisica</from-outcome>
+            <to-view-id>/pessoaFisica.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>pesquisaPessoaFisica</from-outcome>
+            <to-view-id>/pesquisaPessoaFisica.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
 </faces-config>

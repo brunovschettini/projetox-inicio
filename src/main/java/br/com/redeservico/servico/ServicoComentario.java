@@ -17,13 +17,13 @@ public class ServicoComentario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JoinColumn(name = "ID_SERVICOS", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Servicos servicos;
     @JoinColumn(name = "ID_USUARIO_CLIENTE", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Usuario cliente;
     @JoinColumn(name = "ID_MODERADOR", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Moderador moderador;
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_DATA")

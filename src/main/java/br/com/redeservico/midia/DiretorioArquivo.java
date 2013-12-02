@@ -21,7 +21,7 @@ public class DiretorioArquivo implements Serializable {
     private String titulo;
     @Column(name = "DS_LEGENDA", length = 255)
     private String legenda;
-    @JoinColumn(name = "ID", referencedColumnName = "ID_DIRETORIO")
+    @JoinColumn(name = "ID_DIRETORIO", referencedColumnName = "ID")
     @ManyToOne
     private Diretorio diretorio;
     @Column(name = "DS_ARQUIVO_NOME", length = 100)

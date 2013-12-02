@@ -12,7 +12,7 @@
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private int id;
 //    @JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID", nullable = false)
-//    @OneToMany(fetch = FetchType.EAGER)
+//    @OneToMany
 //    private Cliente cliente;
 //
 //    public ClienteConfiguracao() {

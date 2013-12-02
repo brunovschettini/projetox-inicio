@@ -56,7 +56,7 @@
                             <p:commandButton value="Salvar" onclick="dgl_salvar.show()" type="button"/>
                             <p:commandButton value="Novo" action="#{usuarioMB.novo}" update="id_panel_cadastro"/>
                             <p:commandButton value="Excluir" onclick="dgl_excluir.show()"  type="button" />
-                            <p:commandButton value="Pesquisar" action="#{chamadaPaginaBean.pesquisaUsuario()}" />
+                            <p:commandButton value="Pesquisar" action="#{chamadaPaginaMB.pesquisaUsuario()}" />
                         </h:panelGrid>
                     </p:panel>
                     <p:dialog widgetVar="dgl_salvar" header="Salvar este registro?" closable="true" resizable="false">

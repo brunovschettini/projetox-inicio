@@ -27,43 +27,91 @@
                         <p:tabView>
                             <p:tab title="Dados pessoais">
                                 <h:panelGrid columns="2">
-                                    <p:outputLabel value="Nome" for="id_pessoa_nome"/>
-                                    <p:inputText value="#{fisicaMB.fisica.pessoa.nome}" />
-                                    <p:outputLabel value="Data de nascimento" for="id_pessoa_nascimento"/>
-                                    <p:calendar value="#{fisicaMB.fisica.dtNascimento}" pattern="dd/MM/yyyy" readonlyInput="true">
+                                    <p:outputLabel value="Nome:" for="id_pessoa_nome"/>
+                                    <p:inputText value="#{fisicaMB.fisica.pessoa.nome}" id="id_pessoa_nome"/>
+                                    <p:outputLabel value="Data de nascimento:" for="id_pessoa_nascimento"/>
+                                    <p:calendar value="#{fisicaMB.fisica.dtNascimento}" pattern="dd/MM/yyyy" readonlyInput="true" id="id_pessoa_nascimento">
                                         <p:ajax event="dateSelect" update="@this" />
                                     </p:calendar>
-                                    <p:outputLabel value="CPF" for="id_pessoa_documento"/>
+                                    <p:outputLabel value="CPF:" for="id_pessoa_documento"/>
                                     <p:inputMask value="#{fisicaMB.fisica.pessoa.documento}" mask="999.999.999-99" id="id_pessoa_documento"/>
-                                    <p:outputLabel value="RG" for="id_pessoa_rg"/>
+                                    <p:outputLabel value="RG:" for="id_pessoa_rg"/>
                                     <p:inputText value="#{fisicaMB.fisica.rg}" id="id_pessoa_rg"/>
-                                    <p:outputLabel value="E-mail" for="id_pessoa_email"/>
+                                    <p:outputLabel value="E-mail:" for="id_pessoa_email"/>
                                     <p:inputText value="#{fisicaMB.fisica.pessoa.email}" id="id_pessoa_email"/>
                                 </h:panelGrid>
                             </p:tab>
-                            <p:tab title="Endereço">
+                            <p:tab title="Endereço" disabled="#{fisicaMB.fisica.id != -1}">
                                 <h:panelGrid columns="2" id="id_panel_endereco">
-                                    <p:outputLabel value="CEP" for="id_endereco_cep"/>
-                                    <p:inputMask value="#{fisicaMB.pessoaEndereco.endereco.cep}" mask="99.999-999" id="id_endereco_cep">
+                                    <p:outputLabel value="CEP:" for="id_endereco_cep"/>
+                                    <p:inputMask value="#{fisicaMB.pessoaEndereco.endereco.cep}" mask="99999-999" id="id_endereco_cep">
                                         <p:ajax event="blur" update="id_panel_endereco" />
                                     </p:inputMask>
-                                    <p:outputLabel value="Estado" for="id_endereco_estado"/>
+                                    <p:outputLabel value="Tipo de endereço: "/>
+                                    <p:selectOneMenu id="id_endereco_t_endereco" value="#{fisicaMB.idTipoEndereco}">
+                                        <p:ajax event="change" update="id_endereco_t_endereco" />
+                                        <f:selectItem itemLabel="Selecione o tipo de endereço" noSelectionOption="true"/>
+                                        <f:selectItems value="#{fisicaMB.listaTipoEndereco}"/>
+                                    </p:selectOneMenu>                                    
+                                    <p:outputLabel value="Endereço" />
                                     <h:column>
-                                        <p:inputText value="#{fisicaMB.pessoaEndereco.endereco.cidade.estado}" />
-                                        <p:selectOneMenu id="id_endereco_estado">
-                                            <p:ajax event="change" update="id_endereco_cidade" />
-                                            <f:selectItem value="" itemLabel="Selecionar cidade" itemValue=""/>
-                                        </p:selectOneMenu>
+                                        <h:panelGrid columns="6">
+                                            <p:selectOneMenu id="id_endereco_logradouro" value="#{fisicaMB.idLogradouro}">
+                                                <p:ajax event="change" update="@this" />
+                                                <f:selectItem itemLabel="Selecione o logradouro" itemValue="" noSelectionOption="true"/>
+                                                <f:selectItems value="#{fisicaMB.listaLogradouros}"/>
+                                            </p:selectOneMenu>
+                                            <p:inputText value="#{fisicaMB.pessoaEndereco.endereco.descricaoEndereco}" id="id_endereco_descricao"/>
+                                            <p:outputLabel value="Nº" for="id_endereco_numero"/>
+                                            <p:inputText value="#{fisicaMB.pessoaEndereco.numero}" id="id_endereco_numero"/>
+                                            <p:outputLabel value="Complemento: " for="id_endereco_complemento"/>
+                                            <p:inputText value="#{fisicaMB.pessoaEndereco.complemento}" id="id_endereco_complemento"/>
+                                        </h:panelGrid>
                                     </h:column>
-                                    <p:outputLabel value="Cidade" for="id_endereco_cidade"/>
+                                    <p:outputLabel value="Estado:" />
                                     <h:column>
-                                        <p:inputText value="#{fisicaMB.pessoaEndereco.endereco.cidade}" />
-                                        <p:selectOneMenu id="id_endereco_cidade">
-                                            <p:ajax event="change" update="id_endereco_estado" />
-                                            <f:selectItem value="" itemLabel="Selecionar cidade" itemValue=""/>
-                                        </p:selectOneMenu>
+                                        <h:panelGrid columns="4">
+                                            <p:selectOneMenu id="id_endereco_estado" value="#{fisicaMB.idEstado}">
+                                                <p:ajax event="change" update="id_endereco_cidade" listener="#{fisicaMB.listaCidades.clear}"/>
+                                                <f:selectItem itemLabel="Selecione a cidade" itemValue="" noSelectionOption="true"/>
+                                                <f:selectItems value="#{fisicaMB.listaEstados}"/>
+                                            </p:selectOneMenu>
+                                            <p:outputLabel value="Cidade:"/>
+                                            <p:selectOneMenu id="id_endereco_cidade" value="#{fisicaMB.idCidade}">
+                                                <p:ajax event="change" update="id_endereco_cidade" />
+                                                <f:selectItem itemLabel="Selecione o estado" noSelectionOption="true"/>
+                                                <f:selectItems value="#{fisicaMB.listaCidades}"/>
+                                            </p:selectOneMenu>
+                                        </h:panelGrid>
                                     </h:column>
-                                </h:panelGrid>                                
+                                </h:panelGrid>
+                                <h:panelGrid>
+                                    <p:dataTable value="#{fisicaMB.listaPessoaEnderecos}" var="pessoaEndereco">
+                                        <p:column width="Tipo endereço">
+                                            #{pessoaEndereco.tipoEndereco.descricao}
+                                        </p:column>
+                                        <p:column width="Endereço">
+                                            #{pessoaEndereco.endereco.logradouro.descricao} 
+                                            #{pessoaEndereco.endereco.descricaoEndereco}, 
+                                            #{pessoaEndereco.numero} - 
+                                        </p:column>
+                                        <p:column width="Bairro">
+                                            #{pessoaEndereco.endereco.bairro}
+                                        </p:column>
+                                        <p:column width="Cidade">
+                                            #{pessoaEndereco.endereco.cidade.descricao}
+                                        </p:column>
+                                        <p:column width="Estado">
+                                            #{pessoaEndereco.endereco.cidade.estado.descricao}
+                                        </p:column>
+                                        <p:column width="CEP">
+                                            #{pessoaEndereco.endereco.cep}
+                                        </p:column>
+                                        <p:column width="Principal">
+                                            <p:selectBooleanCheckbox value="#{pessoaEndereco.principal}" />
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:panelGrid>
                             </p:tab>
                         </p:tabView>
 

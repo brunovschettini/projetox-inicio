@@ -18,10 +18,10 @@ public class ServicoModeracao implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JoinColumn(name = "ID_USUARIO_MODERADOR", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Usuario moderador;
     @JoinColumn(name = "ID_SERVICO_AGENDAMENTO", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private ServicoAgendamento servicoAgendamento;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "DT_MODERADACAO")

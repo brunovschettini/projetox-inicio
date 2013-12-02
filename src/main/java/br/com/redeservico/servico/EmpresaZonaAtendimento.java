@@ -18,13 +18,13 @@ public class EmpresaZonaAtendimento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JoinColumn(name = "ID_SERVICO", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Servicos servicos;
     @JoinColumn(name = "ID_CIDADE", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Cidade cidade;
     @JoinColumn(name = "ID_ZONA", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Zona zona;
 
     public EmpresaZonaAtendimento() {

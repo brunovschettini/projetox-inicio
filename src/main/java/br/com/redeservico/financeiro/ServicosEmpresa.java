@@ -12,7 +12,7 @@ public class ServicosEmpresa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JoinColumn(name = "ID_SERVICO", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Servicos servicos;
 
 }

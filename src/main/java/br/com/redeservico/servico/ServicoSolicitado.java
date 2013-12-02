@@ -16,10 +16,10 @@ public class ServicoSolicitado implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JoinColumn(name = "ID_SERVICOS", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Servicos servicos;
     @JoinColumn(name = "ID_SERVICO_AGENDAMENTO", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private ServicoAgendamento servicoAgendamento;
     @Column(name = "DS_OBSERVACAO", length = 5000)
     private String observacao;

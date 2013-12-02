@@ -46,10 +46,10 @@ public class EnderecoDAO extends DB {
         return null;
     }
 
-    public List<Cidade> pesquisaCidadesPorEstado(Cidade cidade) {
+    public List<Cidade> pesquisaCidadesPorEstado(int idEstado) {
         try {
             Query query = getEntityManager().createQuery("SELECT C FROM Cidade AS C WHERE C.estado.id = :estado ORDER BY C.estado.descricao ASC, C.descricao "+cidadeOrder);
-            query.setParameter("estado", cidade.getEstado().getId());
+            query.setParameter("estado", idEstado);
             List list = query.getResultList();
             if (!list.isEmpty()) {
                 return list;

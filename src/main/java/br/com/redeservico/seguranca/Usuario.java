@@ -15,14 +15,14 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID", nullable = false)
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     private Pessoa pessoa;
     @Column(name = "DS_LOGIN", length = 15, nullable = false, unique = true)
     private String login;
     @Column(name = "DS_SENHA", length = 6, nullable = false)
     private String senha;
     @JoinColumn(name = "ID_TIPO_USUARIO_ACESSO", referencedColumnName = "ID", nullable = false)
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     private TipoUsuarioAcesso tipoUsuarioAcesso;
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_CADASTRO")
