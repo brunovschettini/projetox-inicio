@@ -50,5 +50,11 @@
             <to-view-id>/pesquisaPessoaFisica.jsf</to-view-id>
             <redirect/>
         </navigation-case>
+        <!-- GERENCIADOR ESPORTIVO -->
+        <navigation-case>
+            <from-outcome>GERENCIADOR_ESPORTIVO</from-outcome>
+            <to-view-id>/GERENCIADOR_ESPORTIVO/index.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>                
     </navigation-rule>
 </faces-config>
