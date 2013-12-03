@@ -13,14 +13,12 @@
         </h:head>
         <f:view>
             <h:form id="form_validacao" onsubmit="#{controleAcessoMB.validacao}"></h:form>
+            <h:form id="form_configuracao" onsubmit="#{configuracaoMB.init()}"></h:form>
             <h:form id="form_historico_menu" onsubmit="#{chamadaPaginaMB.historicoMenu}">
-                <h:panelGrid columns="6" rendered="true">
-                    <h:inputHidden value="#{controleAcessoMB.validacao}" />
-                    <p:dataList styleClass="menuLinksClass" var="menuLinks" value="#{chamadaPaginaMB.menuLinks}" rowIndexVar="it">
-                        <p:graphicImage title="Voltar um nível" rendered="#{menuLinks.descricao != 'Menu Adminstrativo Rede Servico'}"/>
-                        <h:commandLink value="#{menuLinks.descricao}" title="#{menuLinks.descricao}" action="#{chamadaPaginaMB.cliqueMenuLinks(it)}" rendered="#{menuLinks.ativo}" immediate="true" /> 
-                    </p:dataList>
-                </h:panelGrid>
+            <h:inputHidden value="#{controleAcessoMB.validacao}"/>
+            <p:dataList styleClass="menuLinksClass no-border" var="menuLinks" value="#{chamadaPaginaMB.menuLinks}" rowIndexVar="it" >
+                <h:commandLink value="#{menuLinks.descricao} /" title="#{menuLinks.descricao}" action="#{chamadaPaginaMB.cliqueMenuLinks(it)}" rendered="#{menuLinks.ativo}" immediate="true" /> 
+            </p:dataList>
             </h:form>
         </f:view>
 </ui:composition>

@@ -1,3 +1,12 @@
+-- seg_projeto
+-- Criate: 2013-12-02
+
+INSERT INTO seg_projeto (id, ds_descricao) SELECT 1, 'COMPLETO' WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 1);
+INSERT INTO seg_projeto (id, ds_descricao) SELECT 2, 'SITE' WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 2);
+INSERT INTO seg_projeto (id, ds_descricao) SELECT 3, 'REDE_SERVICO' WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 3);
+INSERT INTO seg_projeto (id, ds_descricao) SELECT 4, 'GERENCIADOR_ESPORTIVO' WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 4);
+INSERT INTO seg_projeto (id, ds_descricao) SELECT 5, 'LOJA_VIRTUAL' WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 5);
+SELECT setval('seg_projeto_id_seq', max(id)) FROM seg_projeto;
 
 
 -- sis_semana
@@ -13,21 +22,20 @@ INSERT INTO sis_semana (id, ds_descricao) SELECT 6, 'Sexta'     WHERE NOT EXISTS
 INSERT INTO sis_semana (id, ds_descricao) SELECT 7, 'Sábado'    WHERE NOT EXISTS ( SELECT id FROM sis_semana WHERE id = 7 );
 SELECT setval('sis_semana_id_seq', max(id)) FROM sis_semana;
 
+
 -- seg_modulo
 -- Criate: 2013-07-24
 -- Last edition: 2013-07-24 - by: Bruno Vieira
 
--- INSERT INTO seg_modulo (id, ds_descricao) SELECT 1, 'Financeiro'        WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 1);
--- INSERT INTO seg_modulo (id, ds_descricao) SELECT 2, 'Social'            WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 2);
--- INSERT INTO seg_modulo (id, ds_descricao) SELECT 3, 'Arrecadação'       WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 3);
--- INSERT INTO seg_modulo (id, ds_descricao) SELECT 4, 'Homologação'       WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 4);
--- INSERT INTO seg_modulo (id, ds_descricao) SELECT 5, 'Jurídico'          WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 5);
--- INSERT INTO seg_modulo (id, ds_descricao) SELECT 6, 'Clube'             WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 6);
--- INSERT INTO seg_modulo (id, ds_descricao) SELECT 7, 'Academia'          WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 7);
--- INSERT INTO seg_modulo (id, ds_descricao) SELECT 8, 'Escola'            WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 8);
--- INSERT INTO seg_modulo (id, ds_descricao) SELECT 9, 'Cadastro Auxiliar' WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 9);
--- INSERT INTO seg_modulo (id, ds_descricao) SELECT 10, 'Segurança'        WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 10);
--- SELECT setval('seg_modulo_id_seq', max(id)) FROM seg_modulo;
+INSERT INTO seg_modulo (id, ds_descricao) SELECT 1, 'Segurança'         WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 1);
+INSERT INTO seg_modulo (id, ds_descricao) SELECT 2, 'Serviço'           WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 2);
+INSERT INTO seg_modulo (id, ds_descricao) SELECT 3, 'Edicao'            WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 3);
+INSERT INTO seg_modulo (id, ds_descricao) SELECT 4, 'Esportivo'         WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 4);
+INSERT INTO seg_modulo (id, ds_descricao) SELECT 5, 'Financeiro'        WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 5);
+INSERT INTO seg_modulo (id, ds_descricao) SELECT 6, 'Loja'              WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 6);
+INSERT INTO seg_modulo (id, ds_descricao) SELECT 7, 'Atendimento'       WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 7);
+INSERT INTO seg_modulo (id, ds_descricao) SELECT 8, 'Principal'         WHERE NOT EXISTS ( SELECT id FROM seg_modulo WHERE id = 8);
+SELECT setval('seg_modulo_id_seq', max(id)) FROM seg_modulo;
 
 -- seg_evento
 -- Criate: 2013-08-02
@@ -58,6 +66,13 @@ SELECT setval('seg_nivel_id_seq', max(id)) FROM seg_nivel;
 
 -- INSERT INTO seg_rotina (id, ds_rotina, ds_nome_pagina, ds_classe, is_ativo) SELECT 1, 'Rotina', 'rotina.jsf', '', true WHERE NOT EXISTS ( SELECT id FROM seg_rotina WHERE id = 1);
 -- INSERT INTO seg_rotina (id, ds_rotina, ds_nome_pagina, ds_classe, is_ativo) SELECT 2, 'Usuários Administrativos', 'usuarioAdministrador.jsf', '', true WHERE NOT EXISTS ( SELECT id FROM seg_rotina WHERE id = 2);
+-- INSERT INTO seg_rotina (id, ds_rotina, ds_nome_pagina, ds_classe, is_ativo) SELECT 3, 'Pessoa Física', 'pessoaFisica.jsf', '', true WHERE NOT EXISTS ( SELECT id FROM seg_rotina WHERE id = 3);
+-- INSERT INTO seg_rotina (id, ds_rotina, ds_nome_pagina, ds_classe, is_ativo) SELECT 4, 'Pesquisa Pessoa Física', 'pesquisaPessoaFisica.jsf', '', true WHERE NOT EXISTS ( SELECT id FROM seg_rotina WHERE id = 4);
+-- INSERT INTO seg_rotina (id, ds_rotina, ds_nome_pagina, ds_classe, is_ativo) SELECT 5, 'Menu Edição', 'menuEdição.jsf', '', true WHERE NOT EXISTS ( SELECT id FROM seg_rotina WHERE id = 5);
+-- INSERT INTO seg_rotina (id, ds_rotina, ds_nome_pagina, ds_classe, is_ativo) SELECT 6, 'Menu Financeiro', 'menuFinanceiro.jsf', '', true WHERE NOT EXISTS ( SELECT id FROM seg_rotina WHERE id = 6);
+-- INSERT INTO seg_rotina (id, ds_rotina, ds_nome_pagina, ds_classe, is_ativo) SELECT 7, 'Menu Loja Virtual', 'menuLojaVirtual.jsf', '', true WHERE NOT EXISTS ( SELECT id FROM seg_rotina WHERE id = 7);
+-- INSERT INTO seg_rotina (id, ds_rotina, ds_nome_pagina, ds_classe, is_ativo) SELECT 8, 'Menu Serviço', 'menuServico.jsf', '', true WHERE NOT EXISTS ( SELECT id FROM seg_rotina WHERE id = 8);
+-- INSERT INTO seg_rotina (id, ds_rotina, ds_nome_pagina, ds_classe, is_ativo) SELECT 9, 'Menu Completo', 'menuCompleto.jsf', '', true WHERE NOT EXISTS ( SELECT id FROM seg_rotina WHERE id = 9);
 -- SELECT setval('seg_rotina_id_seq', max(id)) FROM seg_rotina;
 
 -- arr_repis_status
@@ -368,6 +383,9 @@ SELECT setval('sis_temas_id_seq', max(id)) FROM sis_temas;
 
 
 -- START
+
+INSERT INTO seg_configuracao(id, id_projeto) SELECT 1, 2 WHERE NOT EXISTS ( SELECT id FROM seg_configuracao WHERE id = 1);
+SELECT setval('seg_configuracao_id_seq', max(id)) FROM seg_configuracao;
 
 INSERT INTO pes_pessoa(id, ds_nome, id_tipo_documento) SELECT 1, 'Administrador', '1' WHERE NOT EXISTS ( SELECT id FROM pes_pessoa WHERE id = 1);
 SELECT setval('pes_pessoa_id_seq', max(id)) FROM pes_pessoa;

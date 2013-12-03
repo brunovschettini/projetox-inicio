@@ -3,7 +3,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:body>
-        <h:form id="form_menu">
+        <h:form id="form_menu_loja_virtual">
             <p:growl id="id_messages" autoUpdate="true" showDetail="true"/>
             <p:menubar>
                 <p:menuitem value="Inicio" url="#" />  
@@ -13,10 +13,10 @@
                 <p:submenu label="Pessoa">  
                     <p:menuitem value="Pessoa física" action="#{chamadaPaginaMB.pessoaFisica()}" />  
                 </p:submenu>
-                <p:submenu label="Cadastro">  
-                    <p:menuitem value="Prestador de serviços" url="#" />  
-                    <p:menuitem value="Cliente" url="#" />
-                    <p:menuitem value="Login" action="#{controleAcessoMB.login()}" immediate="true"/>
+                <p:submenu label="Departamento">  
+                    <p:menuitem value="Loja Virtual" url="#" />
+                    <p:menuitem value="Financeiro" url="#" />
+                    <p:menuitem value="Edição" url="#" />
                 </p:submenu>
                 <f:facet name="options">
                     <p:inputText value="#{controleAcessoMB.usuario.login}" id="id_login" maxlength="15" size="18"/>

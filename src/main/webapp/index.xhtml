@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <ui:include src="templatePublico.xhtml"/>
+        <ui:include src="/template/templatePublico.xhtml"/>
     </h:head>
     <h:body>
         <div class="wrapper">
@@ -17,12 +17,10 @@
                 <ui:define name="centro">
                     Aqui é o centro do index!
                 </ui:define>
-            </ui:decorate>
+                </ui:decorate>
             </div>
             <br />
-            <h:link outcome="login" value="Página de boas-vindas do Primefaces" />
-            <f:facet name="footer" class="reset-facet">BBBB</f:facet>
-            <div class="menu-top">
+            <div class="google-footer-bar">
                 Footer
             </div>            
         </div>

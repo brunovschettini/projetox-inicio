@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Pessoa Física</title>
-        <ui:include src="templateAdmin.xhtml"/>
+        <ui:include src="/template/templateAdmin.xhtml"/>
     </h:head>
     <h:body>
         <div class="wrapper">
@@ -15,9 +15,6 @@
                 <div class="logo"></div>
             </div>
             <div class="menu-top">
-                <ui:decorate template="/menuRedeServico.xhtml">
-                    <ui:define name="centro"></ui:define>
-                </ui:decorate>
                 <h:form id="form_pessoa_fisica">
                     <div class="font-title-spacing">
                         <p:outputLabel value="Pessoa Física" styleClass="font-title"  />

@@ -12,6 +12,8 @@
 
 /* NOSSO ESTILO (Consultar padrões pré-definidos) */
 
+.menuLinksClass li {list-style: none; display: inline;}
+
 .google-footer-bar {
     //position: absolute;
     bottom: 0;

@@ -55,15 +55,15 @@ public class ControleAcessoMB implements Serializable {
         }
         if (usuario.getTipoUsuarioAcesso().getId() == 1) {
             if (usuarioDAO.usuarioAdministradorExiste(usuario) != null) {
-                return "adminRedeServico";
+                return "admin";
             }
         } else if (usuario.getTipoUsuarioAcesso().getId() == 2) {
             if (usuarioDAO.usuarioEmpresaExiste(usuario) != null) {
-                return "adminRedeServico";
+                return "admin";
             }
         } else if (usuario.getTipoUsuarioAcesso().getId() == 3) {
             if (usuarioDAO.usuarioClienteExiste(usuario) != null) {
-                return "adminRedeServico";
+                return "admin";
             }
         }
         return "login";
