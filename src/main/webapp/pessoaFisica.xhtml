@@ -24,7 +24,7 @@
                     </div>
                     <p:panel id="id_panel_cadastro" header="Cadastro">
                         <p:messages id="id_messages" showDetail="true" autoUpdate="true" closable="true" />
-                        <p:tabView>
+                        <p:tabView id="id_tab_view">
                             <p:tab title="Dados pessoais">
                                 <h:panelGrid columns="2">
                                     <p:outputLabel value="Nome:" for="id_pessoa_nome"/>
@@ -69,8 +69,8 @@
                                         </p:column>
                                     </p:dataTable>
                                 </h:panelGrid>
-                                <p:accordionPanel style="margin-top: 15px" id="id_accordion_panel">  
-                                    <p:tab title="Novo endereço">  
+                                <p:accordionPanel id="id_accordio" style="margin-top: 15px;">
+                                    <p:tab  title="Adicionar novo endereço">
                                         <h:panelGrid columns="2" id="id_panel_endereco">
                                             <p:outputLabel value="CEP:" for="id_endereco_cep"/>
                                             <p:inputMask value="#{fisicaMB.pessoaEndereco.endereco.cep}" mask="99999-999" id="id_endereco_cep" size="10" >
@@ -114,8 +114,8 @@
                                                 </h:panelGrid>
                                             </h:column>
                                         </h:panelGrid>
-                                        <p:commandButton icon="ui-icon-plus" value="Adicionar" action="#{fisicaMB.adicionarPessoaEndereco()}" update="id_panel_endereco, :form_pessoa_fisica:id_accordion_panel:id_panel_grid_endereco"/>                                        
-                                    </p:tab> 
+                                        <p:commandButton icon="ui-icon-plus" value="Adicionar" actionListener="#{fisicaMB.adicionarPessoaEndereco()}" update="id_panel_endereco, :form_pessoa_fisica:id_tab_view:id_panel_grid_endereco"/>u>
+                                    </p:tab>
                                 </p:accordionPanel>
                             </p:tab>
                             <p:tab title="Dados de cobrança" disabled="#{fisicaMB.fisica.id == -1}">
@@ -125,7 +125,7 @@
 
                         <h:panelGrid columns="4" styleClass="margin-top-max">
                             <p:commandButton value="Salvar" onclick="dgl_salvar.show()" type="button"/>
-                            <p:commandButton value="Novo" action="#{fisicaMB.novo}" update="id_panel_cadastro"/>
+                            <p:commandButton value="Novo" action="#{fisicaMB.novo}" update="id_panel_cadastro id_tab_view"/>
                             <p:commandButton value="Excluir" onclick="dgl_excluir.show()"  type="button" />
                             <p:commandButton value="Pesquisar" action="#{chamadaPaginaMB.pesquisaPessoaFisica()}" />
                         </h:panelGrid>
