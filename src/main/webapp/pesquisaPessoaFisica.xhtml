@@ -23,17 +23,17 @@
                         <p:outputLabel value="Pesquisa Pessoa Física" styleClass="font-title"  />
                     </div>
                     <h:panelGrid id="id_panel_grid_endereco">
-                        <p:dataTable value="#{fisicaMB.listaFisicas}" var="fisica">
-                            <p:column width="ID">
+                        <p:dataTable value="#{fisicaMB.listaFisicas}" var="fisica" scrollable="true" scrollHeight="400">
+                            <p:column headerText="ID" styleClass="text-center" width="50">
                                 <p:commandLink value="#{fisica.pessoa.id}" action="#{fisicaMB.editar(fisica)}" />
                             </p:column>
-                            <p:column width="Nome">
+                            <p:column headerText="Nome">
                                 <p:commandLink value="#{fisica.pessoa.nome}" action="#{fisicaMB.editar(fisica)}" />
                             </p:column>
-                            <p:column width="Documento">
+                            <p:column headerText="Documento" width="100">
                                 <p:commandLink value="#{fisica.pessoa.documento}" action="#{fisicaMB.editar(fisica)}" />
                             </p:column>
-                            <p:column width="Nascimento">
+                            <p:column headerText="Nascimento" width="100" styleClass="text-center">
                                 <p:commandLink value="#{fisica.nascimento}" action="#{fisicaMB.editar(fisica)}" />
                             </p:column>            
                         </p:dataTable>
