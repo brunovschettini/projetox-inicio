@@ -64,7 +64,10 @@ public class ChamadaPaginaMB implements Serializable {
             if (carregaPagina) {
                 linkClicado = false;
                 boolean isNivel = false;
-                boolean acessoCadastro = (Boolean) GenericaSessao.getBoolean("acessoCadastro");
+                boolean acessoCadastro = false;
+                if (GenericaSessao.exists("acessoCadastro")) {
+                    acessoCadastro = GenericaSessao.getBoolean("acessoCadastro");
+                }
                 if (nivelLink >= 0 && nivelLink <= 9) {
                     isNivel = true;
                     carregaPagina = false;
@@ -77,7 +80,7 @@ public class ChamadaPaginaMB implements Serializable {
                     case 0:
                         if ((GenericaSessao.getString("indicaAcesso")).equals("local")) {
                             limparMenuLinks(-1);
-                            menuLinks.add(new MenuLinks(0, "adminRedeServico", "Menu Administrativo Rede Servicos", true));
+                            menuLinks.add(new MenuLinks(0, "adminRedeServico", "Rede Servicos", true));
                             isNivel = false;
                         }
                         nivel = nivelLink;
