@@ -31,8 +31,8 @@
             <redirect/>
         </navigation-case>    
         <navigation-case>
-            <from-outcome>adminRedeServico</from-outcome>
-            <to-view-id>/adminRedeServico.jsf</to-view-id>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/admin.jsf</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>

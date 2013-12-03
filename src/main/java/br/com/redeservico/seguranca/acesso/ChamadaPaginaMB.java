@@ -25,6 +25,15 @@ public class ChamadaPaginaMB implements Serializable {
     private int tipoPagina = 0;
     private String urlAtual = "";
     private HttpServletRequest paginaRequerida = null;
+    
+    // MÓDULOS    
+    private final int SEGURANCA = 1;
+    private final int SERVICO = 2;
+    private final int SITE = 3;
+    private final int ESPORTE = 4;
+    private final int FINANCEIRO = 5;
+    private final int LOJA = 6;
+    private final int ATENDIMENTO = 7;
 
     public String metodoGenerico(int tipo, String pagina) {
         paginaRequerida = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -57,7 +66,7 @@ public class ChamadaPaginaMB implements Serializable {
                 carregaPagina = false;
                 return;
             }
-            if (linkAtual.equals("adminRedeServico") || linkAtual.equals("menuPrincipalAcessoWeb") || linkAtual.equals("menuPrincipalSuporteWeb")) {
+            if (linkAtual.equals("admin")) {
                 carregaPagina = true;
                 nivelLink = 0;
             }
@@ -80,7 +89,7 @@ public class ChamadaPaginaMB implements Serializable {
                     case 0:
                         if ((GenericaSessao.getString("indicaAcesso")).equals("local")) {
                             limparMenuLinks(-1);
-                            menuLinks.add(new MenuLinks(0, "adminRedeServico", "Rede Servicos", true));
+                            menuLinks.add(new MenuLinks(0, "admin", "Principal", true));
                             isNivel = false;
                         }
                         nivel = nivelLink;
@@ -204,6 +213,12 @@ public class ChamadaPaginaMB implements Serializable {
         return "login";
     }
 
+    // CHAMADA DE MENUS
+    
+    
+    
+    // CHAMADA DE PÁGINAS
+    
     public String usuarioAdministrador() {
         GenericaSessao.remove("usuarioMB");
         GenericaSessao.remove("pesquisaPessoaMB");
