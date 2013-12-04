@@ -40,6 +40,7 @@ public class FisicaMB implements Serializable {
     private int idTipoEndereco = 0;
     private int idLogradouro = 0;
     private int idEstado = 0;
+    private int indexAccordion = -1;
 
     public void salvar() {
         InterageDAO interageDAO = new InterageDAO();
@@ -110,10 +111,12 @@ public class FisicaMB implements Serializable {
         listaTipoEndereco.clear();
         listaPessoaEnderecos.clear();
         mensagem = "";
+        indexAccordion = -1;
     }
 
     public String editar(Fisica f) {
         fisica = f;
+        indexAccordion = -1;
         carregaSelectItems();
         return "pessoaFisica";
     }
@@ -187,7 +190,6 @@ public class FisicaMB implements Serializable {
 
     public List<SelectItem> getListaCidades() {
         if (listaCidades.isEmpty()) {
-            listaCidades.add(new SelectItem(new Integer(0), "", ""));
             EnderecoDAO enderecoDAO = new EnderecoDAO();
             List<Cidade> list = (List<Cidade>) enderecoDAO.pesquisaCidadesPorEstado(Integer.parseInt(listaEstados.get(idEstado).getDescription()));
             for (int i = 0; i < list.size(); i++) {
@@ -267,25 +269,25 @@ public class FisicaMB implements Serializable {
         listaLogradouros.clear();
         endereco = cEPServico.getEndereco();
         pessoaEndereco.setEndereco(endereco);
-        for (int i = 0; i < listaCidades.size(); i++) {
-            if (Integer.parseInt(listaCidades.get(i).getDescription()) == pessoaEndereco.getEndereco().getCidade().getId()) {
-                idCidade = i;
-                break;
-            }            
-        }
-        for (int i = 0; i < listaLogradouros.size(); i++) {
-            if (Integer.parseInt(listaLogradouros.get(i).getDescription()) == pessoaEndereco.getEndereco().getLogradouro().getId()) {
-                idLogradouro = i;
-                break;
-            }            
-        }
         for (int i = 0; i < listaEstados.size(); i++) {
             if (Integer.parseInt(listaEstados.get(i).getDescription()) == pessoaEndereco.getEndereco().getCidade().getEstado().getId()) {
                 idEstado = i;
                 break;
             }            
         }
-        for (int i = 0; i < listaTipoEndereco.size(); i++) {
+        for (int i = 0; i < getListaCidades().size(); i++) {
+            if (Integer.parseInt(listaCidades.get(i).getDescription()) == pessoaEndereco.getEndereco().getCidade().getId()) {
+                idCidade = i;
+                break;
+            }            
+        }
+        for (int i = 0; i < getListaLogradouros().size(); i++) {
+            if (Integer.parseInt(listaLogradouros.get(i).getDescription()) == pessoaEndereco.getEndereco().getLogradouro().getId()) {
+                idLogradouro = i;
+                break;
+            }            
+        }
+        for (int i = 0; i < getListaTipoEndereco().size(); i++) {
             if (Integer.parseInt(listaTipoEndereco.get(i).getDescription()) == pessoaEndereco.getTipoEndereco().getId()) {
                 idTipoEndereco = i;
                 break;
@@ -297,8 +299,22 @@ public class FisicaMB implements Serializable {
         getListaCidades();
         getListaLogradouros();
         getListaTipoEndereco();
+        listaPessoaEnderecos.clear();
+        getListaPessoaEnderecos();
     }
 
+    public void novoPessoaEndereco() {
+        endereco = new Endereco();
+        pessoaEndereco = new PessoaEndereco();
+        listaCidades.clear();
+        listaLogradouros.clear();
+        listaTipoEndereco.clear();
+        idCidade = 0;
+        idLogradouro = 0;
+        idTipoEndereco = 0;
+        idEstado = 0;
+    }
+    
     public void adicionarPessoaEndereco() {
         if (pessoaEndereco.getEndereco().getCep().equals("")) {
             GenericaMensagem.error("Sistema", "Informar o cep!");
@@ -331,9 +347,24 @@ public class FisicaMB implements Serializable {
             interageDAO.commit();
             listaTipoEndereco.clear();
             listaPessoaEnderecos.clear();
-            GenericaMensagem.info("Sucesso", "Registro adicionado");
             pessoaEndereco = new PessoaEndereco();            
             endereco = new Endereco();
+            indexAccordion = -1;
+            GenericaMensagem.info("Sucesso", "Registro adicionado");
+        } else {
+            InterageDAO interageDAO = new InterageDAO();
+            interageDAO.openTransaction();;
+            if (interageDAO.alter(pessoaEndereco)) {
+                interageDAO.commit();
+                GenericaMensagem.info("Sucesso", "Registro atualizado");
+                listaTipoEndereco.clear();
+                listaPessoaEnderecos.clear();
+                pessoaEndereco = new PessoaEndereco();            
+                endereco = new Endereco();                
+            } else {
+                interageDAO.rollback();
+                GenericaMensagem.error("Sistema", "Falha ao atualizar registro!");
+            }
         }
     }
 
@@ -343,12 +374,61 @@ public class FisicaMB implements Serializable {
         if (interageDAO.delete((PessoaEndereco) interageDAO.findObjectByID(pe.getId(), "PessoaEndereco"))) {
             interageDAO.commit();
             GenericaMensagem.info("Sucesso", "Registro removido");
+            indexAccordion = -1;
             listaTipoEndereco.clear();
             listaPessoaEnderecos.clear();
         } else {
             interageDAO.rollback();
             GenericaMensagem.error("Sistema", "Falha ao remover registro!");
         }
+    }
+    
+    public void editarPessoaEndereco(PessoaEndereco pe) {
+        pessoaEndereco = pe;
+        for (int i = 0; i < listaEstados.size(); i++) {
+            if (Integer.parseInt(listaEstados.get(i).getDescription()) == pessoaEndereco.getEndereco().getCidade().getEstado().getId()) {
+                idEstado = i;
+                break;
+            }            
+        }
+        for (int i = 0; i < getListaCidades().size(); i++) {
+            if (Integer.parseInt(listaCidades.get(i).getDescription()) == pessoaEndereco.getEndereco().getCidade().getId()) {
+                idCidade = i;
+                break;
+            }            
+        }
+        for (int i = 0; i < getListaLogradouros().size(); i++) {
+            if (Integer.parseInt(listaLogradouros.get(i).getDescription()) == pessoaEndereco.getEndereco().getLogradouro().getId()) {
+                idLogradouro = i;
+                break;
+            }            
+        }
+        for (int i = 0; i < getListaTipoEndereco().size(); i++) {
+            if (Integer.parseInt(listaTipoEndereco.get(i).getDescription()) == pessoaEndereco.getTipoEndereco().getId()) {
+                idTipoEndereco = i;
+                break;
+            }            
+        }        
+        indexAccordion = 0;
+    }
+    
+    public void enderecoPrincipal(PessoaEndereco pe) {
+        InterageDAO interageDAO = new InterageDAO();
+        interageDAO.openTransaction();
+        for (int i = 0; i < listaPessoaEnderecos.size(); i++) {
+            listaPessoaEnderecos.get(i).setPrincipal(false);
+            if (interageDAO.alter(listaPessoaEnderecos.get(i))) {
+                interageDAO.commit();
+            }
+        }
+        pe.setPrincipal(true);
+        if (interageDAO.alter(pe)) {
+            interageDAO.commit();
+            GenericaMensagem.error("Sucesso", "Adicionado com sucesso");
+            listaPessoaEnderecos.clear();
+            return;
+        }
+        interageDAO.rollback();
     }
 
     public Endereco getEndereco() {
@@ -357,5 +437,13 @@ public class FisicaMB implements Serializable {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public int getIndexAccordion() {
+        return indexAccordion;
+    }
+
+    public void setIndexAccordion(int indexAccordion) {
+        this.indexAccordion = indexAccordion;
     }
 }
