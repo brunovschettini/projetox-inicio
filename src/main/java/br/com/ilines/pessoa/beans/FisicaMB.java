@@ -447,3 +447,4 @@ public class FisicaMB implements Serializable {
         this.indexAccordion = indexAccordion;
     }
 }
+ 
