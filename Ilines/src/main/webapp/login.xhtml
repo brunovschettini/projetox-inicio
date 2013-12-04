@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Área administrativa</title>
+        <ui:include src="/template/templatePublico.xhtml"/>
+    </h:head>
+    <h:body>
+        <p:panel styleClass="wrapper">
+            <div class="header">
+                <h:panelGrid columns="2" width="1000">
+                    <p:panel style="width: 750px; height: 500px" styleClass="no-border bg-login">
+                        
+                    </p:panel>
+                    <p:panel style="width: 250px; height: 500px;">
+                        <h1>Acessar minha conta</h1>
+                        <h:form id="id_form_login_admin">
+                            <p:messages id="id_messages" showDetail="true" showSummary="true" autoUpdate="true" />
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="Login *" for="id_login"/>
+                                <p:column>
+                                    <p:inputText value="#{controleAcessoMB.usuario.login}" id="id_login" maxlength="15" size="18"/>
+                                    <p:watermark for="id_login" value="Nome de usuário" /> 
+                                </p:column>
+                                <p:outputLabel value="Senha *" for="id_senha"/>
+                                <p:column>
+                                    <p:inputText type="password" value="#{controleAcessoMB.usuario.senha}" id="id_senha" maxlength="15" size="18"  />
+                                    <p:watermark for="id_senha" value="Senha" /> 
+                                </p:column>
+                            </h:panelGrid>
+                            <p:commandButton value="Acessar" action="#{controleAcessoMB.login()}" styleClass="margin-top" update="id_messages"/>
+                        </h:form>
+                        
+                        <h4 style="margin-top: 50px">Cadastrar</h4>
+                        <h:form id="id_form_cadastro_admins">
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="Nome" for="id_login"/>
+                                <p:inputText id="id_login" disabled="true"/>
+                                <p:outputLabel value="Estado" for="id_estado"/>
+                                <p:selectOneMenu id="id_estado" disabled="true"></p:selectOneMenu>
+                                <p:outputLabel value="Cidade" for="id_cidade"/>
+                                <p:selectOneMenu id="id_cidade" disabled="true"></p:selectOneMenu>
+                                <p:outputLabel value="Data de nascimento" for="id_nascimento"/>
+                                <p:calendar id="id_nascimento" disabled="true" size="8" readonlyInput="true" />
+                                <p:outputLabel value="Sexo" for="id_sexo"/>
+                                <p:selectOneMenu id="id_sexo" disabled="true"></p:selectOneMenu>
+                            </h:panelGrid>
+                            <p:commandButton value="Avançar" styleClass="margin-top"/>
+                        </h:form>
+                    </p:panel>
+                </h:panelGrid>
+            </div>
+        </p:panel>
+    </h:body>
+</html>
+

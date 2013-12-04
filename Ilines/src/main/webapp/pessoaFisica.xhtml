@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Pessoa Física</title>
+        <ui:include src="/template/templateAdmin.xhtml"/>
+    </h:head>
+    <h:body>
+        <div class="wrapper">
+            <div class="header">
+                <div class="logo"></div>
+            </div>
+            <div class="menu-top">
+                <h:form id="form_pessoa_fisica">
+                    <div class="font-title-spacing">
+                        <p:outputLabel value="Pessoa Física" styleClass="font-title"  />
+                    </div>
+                    <p:panel id="id_panel_cadastro" header="Cadastro">
+                        <p:messages id="id_messages" showDetail="true" autoUpdate="true" closable="true" />
+                        <p:tabView id="id_tab_view">
+                            <p:tab title="Dados pessoais">
+                                <h:panelGrid columns="2">
+                                    <p:outputLabel value="Nome:" for="id_pessoa_nome"/>
+                                    <p:inputText value="#{fisicaMB.fisica.pessoa.nome}" id="id_pessoa_nome" size="50"/>
+                                    <p:outputLabel value="Data de nascimento:" for="id_pessoa_nascimento"/>
+                                    <p:calendar value="#{fisicaMB.fisica.dtNascimento}" pattern="dd/MM/yyyy" readonlyInput="true" id="id_pessoa_nascimento" size="10" navigator="true" >
+                                        <p:ajax event="dateSelect" update="@this" />
+                                    </p:calendar>
+                                    <p:outputLabel value="CPF:" for="id_pessoa_documento"/>
+                                    <p:inputMask value="#{fisicaMB.fisica.pessoa.documento}" mask="999.999.999-99" id="id_pessoa_documento" size="12" maxlength="16"/>
+                                    <p:outputLabel value="RG:" for="id_pessoa_rg"/>
+                                    <p:inputText value="#{fisicaMB.fisica.rg}" id="id_pessoa_rg"/>
+                                    <p:outputLabel value="E-mail:" for="id_pessoa_email"/>
+                                    <p:inputText value="#{fisicaMB.fisica.pessoa.email}" id="id_pessoa_email" size="40"/>
+                                </h:panelGrid>
+                            </p:tab>
+                            <p:tab title="Endereço" disabled="#{fisicaMB.fisica.id == -1}">
+                                <h:panelGrid id="id_panel_grid_endereco">
+                                    <p:dataTable value="#{fisicaMB.listaPessoaEnderecos}" var="pessoaEndereco">
+                                        <p:column headerText="Tipo endereço">
+                                            #{pessoaEndereco.tipoEndereco.descricao}
+                                        </p:column>
+                                        <p:column headerText="Endereço">
+                                            #{pessoaEndereco.endereco.logradouro.descricao} 
+                                            #{pessoaEndereco.endereco.descricaoEndereco}, 
+                                            #{pessoaEndereco.numero} - 
+                                        </p:column>
+                                        <p:column headerText="Bairro">
+                                            #{pessoaEndereco.endereco.bairro}
+                                        </p:column>
+                                        <p:column headerText="Cidade">
+                                            #{pessoaEndereco.endereco.cidade.descricao}
+                                        </p:column>
+                                        <p:column headerText="Estado">
+                                            #{pessoaEndereco.endereco.cidade.estado.descricao}
+                                        </p:column>
+                                        <p:column headerText="CEP">
+                                            #{pessoaEndereco.endereco.cep}
+                                        </p:column>
+                                        <p:column headerText="Principal">
+                                            <p:selectBooleanCheckbox value="#{pessoaEndereco.principal}" />
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:panelGrid>
+                                <p:accordionPanel id="id_accordio" style="margin-top: 15px;">
+                                    <p:tab  title="Adicionar novo endereço">
+                                        <h:panelGrid columns="2" id="id_panel_endereco">
+                                            <p:outputLabel value="CEP:" for="id_endereco_cep"/>
+                                            <p:inputMask value="#{fisicaMB.pessoaEndereco.endereco.cep}" mask="99999-999" id="id_endereco_cep" size="10" >
+                                                <p:ajax event="blur" update="id_panel_endereco" listener="#{fisicaMB.pesquisaCEP()}"/>
+                                            </p:inputMask>
+                                            <p:outputLabel value="Tipo de endereço: "/>
+                                            <p:selectOneMenu id="id_endereco_t_endereco" value="#{fisicaMB.idTipoEndereco}" disabled="#{fisicaMB.pessoaEndereco.endereco.cep.equals('')}">
+                                                <p:ajax event="change" update="id_endereco_t_endereco" />
+                                                <f:selectItem itemLabel="Selecione o tipo de endereço" noSelectionOption="true"/>
+                                                <f:selectItems value="#{fisicaMB.listaTipoEndereco}"/>
+                                            </p:selectOneMenu>                                    
+                                            <p:outputLabel value="Endereço" />
+                                            <h:column>
+                                                <h:panelGrid columns="6">
+                                                    <p:selectOneMenu id="id_endereco_logradouro" value="#{fisicaMB.idLogradouro}" disabled="#{fisicaMB.pessoaEndereco.endereco.cep.equals('')}">
+                                                        <p:ajax event="change" update="@this" />
+                                                        <f:selectItem itemLabel="Selecione o logradouro" itemValue="" noSelectionOption="true"/>
+                                                        <f:selectItems value="#{fisicaMB.listaLogradouros}"/>
+                                                    </p:selectOneMenu>
+                                                    <p:inputText value="#{fisicaMB.pessoaEndereco.endereco.descricaoEndereco}" id="id_endereco_descricao" disabled="#{fisicaMB.pessoaEndereco.endereco.cep.equals('')}"/>
+                                                    <p:outputLabel value="Nº" for="id_endereco_numero"/>
+                                                    <p:inputText value="#{fisicaMB.pessoaEndereco.numero}" id="id_endereco_numero" disabled="#{fisicaMB.pessoaEndereco.endereco.cep.equals('')}"/>
+                                                    <p:outputLabel value="Complemento: " for="id_endereco_complemento"/>
+                                                    <p:inputText value="#{fisicaMB.pessoaEndereco.complemento}" id="id_endereco_complemento" disabled="#{fisicaMB.pessoaEndereco.endereco.cep.equals('')}"/>
+                                                </h:panelGrid>
+                                            </h:column>
+                                            <p:outputLabel value="Estado:" />
+                                            <h:column>
+                                                <h:panelGrid columns="4">
+                                                    <p:selectOneMenu id="id_endereco_estado" value="#{fisicaMB.idEstado}" disabled="#{fisicaMB.pessoaEndereco.endereco.cep.equals('')}">
+                                                        <p:ajax event="change" update="id_endereco_cidade" listener="#{fisicaMB.listaCidades.clear}"/>
+                                                        <f:selectItem itemLabel="Selecione a cidade" itemValue="" noSelectionOption="true"/>
+                                                        <f:selectItems value="#{fisicaMB.listaEstados}"/>
+                                                    </p:selectOneMenu>
+                                                    <p:outputLabel value="Cidade:"/>
+                                                    <p:selectOneMenu id="id_endereco_cidade" value="#{fisicaMB.idCidade}" disabled="#{fisicaMB.pessoaEndereco.endereco.cep.equals('')}">
+                                                        <p:ajax event="change" update="id_endereco_cidade" />
+                                                        <f:selectItem itemLabel="Selecione o estado" noSelectionOption="true"/>
+                                                        <f:selectItems value="#{fisicaMB.listaCidades}"/>
+                                                    </p:selectOneMenu>
+                                                </h:panelGrid>
+                                            </h:column>
+                                        </h:panelGrid>
+                                        <p:commandButton icon="ui-icon-plus" value="Adicionar" actionListener="#{fisicaMB.adicionarPessoaEndereco()}" update="id_panel_endereco, :form_pessoa_fisica:id_tab_view:id_panel_grid_endereco"/>u>
+                                    </p:tab>
+                                </p:accordionPanel>
+                            </p:tab>
+                            <p:tab title="Dados de cobrança" disabled="#{fisicaMB.fisica.id == -1}">
+                                
+                            </p:tab>
+                        </p:tabView>
+
+                        <h:panelGrid columns="4" styleClass="margin-top-max">
+                            <p:commandButton value="Salvar" onclick="dgl_salvar.show()" type="button"/>
+                            <p:commandButton value="Novo" action="#{fisicaMB.novo}" update="id_panel_cadastro id_tab_view"/>
+                            <p:commandButton value="Excluir" onclick="dgl_excluir.show()"  type="button" />
+                            <p:commandButton value="Pesquisar" action="#{chamadaPaginaMB.pesquisaPessoaFisica()}" />
+                        </h:panelGrid>
+                    </p:panel>
+                    <p:dialog widgetVar="dgl_salvar" header="Salvar este registro?" closable="true" resizable="false">
+                        <h:panelGrid columns="3">
+                            <p:commandButton value="Confirmar" onclick="dgl_salvar.hide(); dgl_mensagem.show()" action="#{fisicaMB.salvar()}" update="id_panel_cadastro, id_mensagem"/>
+                            <p:commandButton value="Cancelar" onclick="dgl_salvar.hide()" type="button" />
+                        </h:panelGrid>
+                    </p:dialog>
+                    <p:dialog widgetVar="dgl_excluir" header="Excluir este registro?" closable="true" resizable="false">
+                        <h:panelGrid columns="3">
+                            <p:commandButton value="Confirmar" onclick="dgl_excluir.hide(); dgl_mensagem.show()" action="#{fisicaMB.excluir()}" update="id_panel_cadastro, id_mensagem"/>
+                            <p:commandButton value="Cancelar" onclick="dgl_excluir.hide()" type="button" />
+                        </h:panelGrid>
+                    </p:dialog>
+                    <p:dialog widgetVar="dgl_mensagem" header="Mensagem" closable="true" resizable="false">
+                        <h:panelGrid columns="3">
+                            <p:outputLabel value="#{fisicaMB.mensagem}" id="id_mensagem" />
+                            <p:commandButton value="OK" onclick="dgl_mensagem.hide()" type="button" />
+                        </h:panelGrid>
+                    </p:dialog>
+                </h:form>                
+            </div>
+        </div>
+        <br />
+    </h:body>
+</html>
+

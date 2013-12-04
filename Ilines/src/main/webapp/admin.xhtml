@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Principal</title>
+        <ui:include src="/template/templateAdmin.xhtml"/>
+    </h:head>
+    <h:body>        
+        <div class="wrapper">
+            <div class="header">
+                <div class="logo"></div>
+            </div>
+            <div class="menu-top">                
+                <c:if test="#{configuracaoMB.configuracao.projeto.descricao.equals('COMPLETO')}">
+                    <ui:decorate template="/template/templateMenuCompleto.xhtml"></ui:decorate>
+                </c:if>
+                <c:if test="#{configuracaoMB.configuracao.projeto.descricao.equals('REDE_SERVICO')}">
+                    <ui:decorate template="/template/templateMenuServico.xhtml"></ui:decorate>
+                </c:if>
+                <c:if test="#{configuracaoMB.configuracao.projeto.descricao.equals('SITE')}">
+                    <ui:decorate template="/template/templateMenuSite.xhtml"></ui:decorate>
+                </c:if>
+                <c:if test="#{configuracaoMB.configuracao.projeto.descricao.equals('GERENCIADOR_ESPORTIVO')}">
+                    <ui:decorate template="/template/templateMenuGerenciadorEsportivo.xhtml"></ui:decorate>
+                </c:if>
+                <c:if test="#{configuracaoMB.configuracao.projeto.descricao.equals('LOJA_VIRUAL')}">
+                    <ui:decorate template="/template/templateMenuLojaVirual.xhtml"></ui:decorate>
+                </c:if>
+            </div>
+            <br />
+            <div class="google-footer-bar">
+                Footer
+            </div>            
+        </div>
+        <br />
+    </h:body>
+</html>
+
