@@ -94,7 +94,7 @@
 .no-resize {resize: none;}
 
 
-// DESIGN
+/* DESIGN */
 
 .sb tr, .sb td {border: none !important;  padding: 0.0em 0.0em; }
 .sbb tr, .sbb td {  border: none !important; }
@@ -110,3 +110,12 @@ div.reset-facet {background: transparent;}
 
 .font-title {font-size: 24pt!important;}
 .font-title-spacing {margin-top: 15px!important; margin-bottom: 15px!important;}
+
+
+/* IMAGENS */
+
+
+.ilines-icon {width: 16px; height: 16px; background-image: url('images/16x16-free-application-icons.png'); display: block;}
+.ilines-icon-disk {background-position: 818px 0;}
+.ilines-icon-trade {background-position: 818px -1062px;}
+.ilines-icon-home {background-position: 894px -1062px;}
