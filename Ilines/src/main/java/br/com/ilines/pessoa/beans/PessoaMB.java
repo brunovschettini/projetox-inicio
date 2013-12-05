@@ -24,7 +24,7 @@ import javax.faces.model.SelectItem;
 
 @ManagedBean
 @SessionScoped
-public class FisicaMB implements Serializable {
+public class PessoaMB implements Serializable {
 
     private Fisica fisica = new Fisica();
     private PessoaEndereco pessoaEndereco = new PessoaEndereco();
